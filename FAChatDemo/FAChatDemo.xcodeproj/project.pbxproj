@@ -1,0 +1,524 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ED03D39B2CF0D40A005361EA /* FAChat in Frameworks */ = {isa = PBXBuildFile; productRef = ED03D39A2CF0D40A005361EA /* FAChat */; };
+		ED0C09422D75A3930028CDC0 /* ChatButtonTooltipBannerScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED0C09412D75A3930028CDC0 /* ChatButtonTooltipBannerScreen.swift */; };
+		ED1CE15F2D5D1931007EB720 /* ChatDownButtonScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1CE15E2D5D1931007EB720 /* ChatDownButtonScreen.swift */; };
+		ED1CE1662D5F67EE007EB720 /* ChatRightBubbleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1CE1652D5F67EE007EB720 /* ChatRightBubbleScreen.swift */; };
+		ED1CE1692D5F83B9007EB720 /* ChatBubbleLeftScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1CE1682D5F83B9007EB720 /* ChatBubbleLeftScreen.swift */; };
+		ED66EE402CB80C23006F6EB7 /* FAChatDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED66EE3F2CB80C23006F6EB7 /* FAChatDemoApp.swift */; };
+		ED66EE422CB80C23006F6EB7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED66EE412CB80C23006F6EB7 /* ContentView.swift */; };
+		ED66EE442CB80C2B006F6EB7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED66EE432CB80C2B006F6EB7 /* Assets.xcassets */; };
+		ED66EE472CB80C2B006F6EB7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED66EE462CB80C2B006F6EB7 /* Preview Assets.xcassets */; };
+		ED748DC12CFDD37A005D852F /* ChatSuggestionsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED748DC02CFDD37A005D852F /* ChatSuggestionsScreen.swift */; };
+		ED8C44B92D944AEA0023980B /* ChatTypingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8C44B82D944AEA0023980B /* ChatTypingScreen.swift */; };
+		EDA68F512CD233370080B365 /* ChatTextInputsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA68F502CD233370080B365 /* ChatTextInputsScreen.swift */; };
+		EDA68F542CD5240A0080B365 /* ChatDateScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA68F532CD5240A0080B365 /* ChatDateScreen.swift */; };
+		EDB20BF22CC95106000CBA30 /* ChatBubbleScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB20BF12CC95106000CBA30 /* ChatBubbleScreen.swift */; };
+		EDE944DB2CDCD8560093947C /* ChatQuoteScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE944DA2CDCD8560093947C /* ChatQuoteScreen.swift */; };
+		EDE944DD2CDCD85D0093947C /* ChatDialogScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE944DC2CDCD85D0093947C /* ChatDialogScreen.swift */; };
+		EDF74C312D70A979008733C4 /* ChatBottomSheetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF74C302D70A979008733C4 /* ChatBottomSheetScreen.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		ED03D3992CF0D3FD005361EA /* FAChat */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = FAChat; path = ..; sourceTree = "<group>"; };
+		ED0C09412D75A3930028CDC0 /* ChatButtonTooltipBannerScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatButtonTooltipBannerScreen.swift; sourceTree = "<group>"; };
+		ED1CE15E2D5D1931007EB720 /* ChatDownButtonScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDownButtonScreen.swift; sourceTree = "<group>"; };
+		ED1CE1652D5F67EE007EB720 /* ChatRightBubbleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRightBubbleScreen.swift; sourceTree = "<group>"; };
+		ED1CE1682D5F83B9007EB720 /* ChatBubbleLeftScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatBubbleLeftScreen.swift; sourceTree = "<group>"; };
+		ED66EE3C2CB80C23006F6EB7 /* FAChatDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FAChatDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED66EE3F2CB80C23006F6EB7 /* FAChatDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAChatDemoApp.swift; sourceTree = "<group>"; };
+		ED66EE412CB80C23006F6EB7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		ED66EE432CB80C2B006F6EB7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ED66EE462CB80C2B006F6EB7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		ED748DC02CFDD37A005D852F /* ChatSuggestionsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatSuggestionsScreen.swift; sourceTree = "<group>"; };
+		ED8C44B82D944AEA0023980B /* ChatTypingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTypingScreen.swift; sourceTree = "<group>"; };
+		EDA68F502CD233370080B365 /* ChatTextInputsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTextInputsScreen.swift; sourceTree = "<group>"; };
+		EDA68F532CD5240A0080B365 /* ChatDateScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatDateScreen.swift; sourceTree = "<group>"; };
+		EDB20BF12CC95106000CBA30 /* ChatBubbleScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBubbleScreen.swift; sourceTree = "<group>"; };
+		EDE944DA2CDCD8560093947C /* ChatQuoteScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatQuoteScreen.swift; sourceTree = "<group>"; };
+		EDE944DC2CDCD85D0093947C /* ChatDialogScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDialogScreen.swift; sourceTree = "<group>"; };
+		EDF74C302D70A979008733C4 /* ChatBottomSheetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBottomSheetScreen.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ED66EE392CB80C23006F6EB7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED03D39B2CF0D40A005361EA /* FAChat in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ED1CE15D2D5D190A007EB720 /* ChatDownButton */ = {
+			isa = PBXGroup;
+			children = (
+				ED1CE15E2D5D1931007EB720 /* ChatDownButtonScreen.swift */,
+			);
+			path = ChatDownButton;
+			sourceTree = "<group>";
+		};
+		ED1CE1642D5F67DB007EB720 /* Right */ = {
+			isa = PBXGroup;
+			children = (
+				ED1CE1652D5F67EE007EB720 /* ChatRightBubbleScreen.swift */,
+			);
+			path = Right;
+			sourceTree = "<group>";
+		};
+		ED1CE1672D5F83B9007EB720 /* Left */ = {
+			isa = PBXGroup;
+			children = (
+				ED1CE1682D5F83B9007EB720 /* ChatBubbleLeftScreen.swift */,
+			);
+			path = Left;
+			sourceTree = "<group>";
+		};
+		ED66EE332CB80C23006F6EB7 = {
+			isa = PBXGroup;
+			children = (
+				ED66EE4D2CB80C74006F6EB7 /* Packages */,
+				ED66EE3E2CB80C23006F6EB7 /* FAChatDemo */,
+				ED66EE3D2CB80C23006F6EB7 /* Products */,
+				EDD659672CB9798A005D0F69 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		ED66EE3D2CB80C23006F6EB7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ED66EE3C2CB80C23006F6EB7 /* FAChatDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ED66EE3E2CB80C23006F6EB7 /* FAChatDemo */ = {
+			isa = PBXGroup;
+			children = (
+				ED8C44B72D944A1A0023980B /* ChatTyping */,
+				EDF74C322D720A9E008733C4 /* ChatButtonTooltipBannerScreen */,
+				EDF74C2F2D70A969008733C4 /* ChatBottomSheet */,
+				ED1CE15D2D5D190A007EB720 /* ChatDownButton */,
+				ED748DBF2CFDD37A005D852F /* ChatSuggestions */,
+				EDA68F4F2CD233230080B365 /* ChatTextInputs */,
+				EDA68F522CD523FA0080B365 /* ChatDate */,
+				EDE944D42CDA2DB90093947C /* ChatDialog */,
+				EDE944D72CDA65030093947C /* ChatQuote */,
+				EDDEA98E2CC7A997002EFC7A /* ChatBubble */,
+				ED66EE3F2CB80C23006F6EB7 /* FAChatDemoApp.swift */,
+				ED66EE412CB80C23006F6EB7 /* ContentView.swift */,
+				ED66EE432CB80C2B006F6EB7 /* Assets.xcassets */,
+				ED66EE452CB80C2B006F6EB7 /* Preview Content */,
+			);
+			path = FAChatDemo;
+			sourceTree = "<group>";
+		};
+		ED66EE452CB80C2B006F6EB7 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				ED66EE462CB80C2B006F6EB7 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		ED66EE4D2CB80C74006F6EB7 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				ED03D3992CF0D3FD005361EA /* FAChat */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		ED748DBF2CFDD37A005D852F /* ChatSuggestions */ = {
+			isa = PBXGroup;
+			children = (
+				ED748DC02CFDD37A005D852F /* ChatSuggestionsScreen.swift */,
+			);
+			path = ChatSuggestions;
+			sourceTree = "<group>";
+		};
+		ED8C44B72D944A1A0023980B /* ChatTyping */ = {
+			isa = PBXGroup;
+			children = (
+				ED8C44B82D944AEA0023980B /* ChatTypingScreen.swift */,
+			);
+			path = ChatTyping;
+			sourceTree = "<group>";
+		};
+		EDA68F4F2CD233230080B365 /* ChatTextInputs */ = {
+			isa = PBXGroup;
+			children = (
+				EDA68F502CD233370080B365 /* ChatTextInputsScreen.swift */,
+			);
+			path = ChatTextInputs;
+			sourceTree = "<group>";
+		};
+		EDA68F522CD523FA0080B365 /* ChatDate */ = {
+			isa = PBXGroup;
+			children = (
+				EDA68F532CD5240A0080B365 /* ChatDateScreen.swift */,
+			);
+			path = ChatDate;
+			sourceTree = "<group>";
+		};
+		EDD659672CB9798A005D0F69 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EDDEA98E2CC7A997002EFC7A /* ChatBubble */ = {
+			isa = PBXGroup;
+			children = (
+				ED1CE1672D5F83B9007EB720 /* Left */,
+				ED1CE1642D5F67DB007EB720 /* Right */,
+				EDB20BF12CC95106000CBA30 /* ChatBubbleScreen.swift */,
+			);
+			path = ChatBubble;
+			sourceTree = "<group>";
+		};
+		EDE944D42CDA2DB90093947C /* ChatDialog */ = {
+			isa = PBXGroup;
+			children = (
+				EDE944DC2CDCD85D0093947C /* ChatDialogScreen.swift */,
+			);
+			path = ChatDialog;
+			sourceTree = "<group>";
+		};
+		EDE944D72CDA65030093947C /* ChatQuote */ = {
+			isa = PBXGroup;
+			children = (
+				EDE944DA2CDCD8560093947C /* ChatQuoteScreen.swift */,
+			);
+			path = ChatQuote;
+			sourceTree = "<group>";
+		};
+		EDF74C2F2D70A969008733C4 /* ChatBottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				EDF74C302D70A979008733C4 /* ChatBottomSheetScreen.swift */,
+			);
+			path = ChatBottomSheet;
+			sourceTree = "<group>";
+		};
+		EDF74C322D720A9E008733C4 /* ChatButtonTooltipBannerScreen */ = {
+			isa = PBXGroup;
+			children = (
+				ED0C09412D75A3930028CDC0 /* ChatButtonTooltipBannerScreen.swift */,
+			);
+			path = ChatButtonTooltipBannerScreen;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ED66EE3B2CB80C23006F6EB7 /* FAChatDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ED66EE4A2CB80C2B006F6EB7 /* Build configuration list for PBXNativeTarget "FAChatDemo" */;
+			buildPhases = (
+				ED66EE382CB80C23006F6EB7 /* Sources */,
+				ED66EE392CB80C23006F6EB7 /* Frameworks */,
+				ED66EE3A2CB80C23006F6EB7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FAChatDemo;
+			packageProductDependencies = (
+				ED03D39A2CF0D40A005361EA /* FAChat */,
+			);
+			productName = FAChatDemo;
+			productReference = ED66EE3C2CB80C23006F6EB7 /* FAChatDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ED66EE342CB80C23006F6EB7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					ED66EE3B2CB80C23006F6EB7 = {
+						CreatedOnToolsVersion = 13.2;
+					};
+				};
+			};
+			buildConfigurationList = ED66EE372CB80C23006F6EB7 /* Build configuration list for PBXProject "FAChatDemo" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ED66EE332CB80C23006F6EB7;
+			productRefGroup = ED66EE3D2CB80C23006F6EB7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ED66EE3B2CB80C23006F6EB7 /* FAChatDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ED66EE3A2CB80C23006F6EB7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED66EE472CB80C2B006F6EB7 /* Preview Assets.xcassets in Resources */,
+				ED66EE442CB80C2B006F6EB7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ED66EE382CB80C23006F6EB7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ED748DC12CFDD37A005D852F /* ChatSuggestionsScreen.swift in Sources */,
+				ED1CE1662D5F67EE007EB720 /* ChatRightBubbleScreen.swift in Sources */,
+				ED8C44B92D944AEA0023980B /* ChatTypingScreen.swift in Sources */,
+				EDE944DB2CDCD8560093947C /* ChatQuoteScreen.swift in Sources */,
+				ED0C09422D75A3930028CDC0 /* ChatButtonTooltipBannerScreen.swift in Sources */,
+				ED66EE422CB80C23006F6EB7 /* ContentView.swift in Sources */,
+				EDF74C312D70A979008733C4 /* ChatBottomSheetScreen.swift in Sources */,
+				ED1CE15F2D5D1931007EB720 /* ChatDownButtonScreen.swift in Sources */,
+				EDA68F542CD5240A0080B365 /* ChatDateScreen.swift in Sources */,
+				ED1CE1692D5F83B9007EB720 /* ChatBubbleLeftScreen.swift in Sources */,
+				EDB20BF22CC95106000CBA30 /* ChatBubbleScreen.swift in Sources */,
+				ED66EE402CB80C23006F6EB7 /* FAChatDemoApp.swift in Sources */,
+				EDA68F512CD233370080B365 /* ChatTextInputsScreen.swift in Sources */,
+				EDE944DD2CDCD85D0093947C /* ChatDialogScreen.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ED66EE482CB80C2B006F6EB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		ED66EE492CB80C2B006F6EB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ED66EE4B2CB80C2B006F6EB7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FAChatDemo/Preview Content\"";
+				DEVELOPMENT_TEAM = PY9TWBV6RF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = psb.FAChatDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ED66EE4C2CB80C2B006F6EB7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"FAChatDemo/Preview Content\"";
+				DEVELOPMENT_TEAM = PY9TWBV6RF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = psb.FAChatDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ED66EE372CB80C23006F6EB7 /* Build configuration list for PBXProject "FAChatDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED66EE482CB80C2B006F6EB7 /* Debug */,
+				ED66EE492CB80C2B006F6EB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED66EE4A2CB80C2B006F6EB7 /* Build configuration list for PBXNativeTarget "FAChatDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ED66EE4B2CB80C2B006F6EB7 /* Debug */,
+				ED66EE4C2CB80C2B006F6EB7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ED03D39A2CF0D40A005361EA /* FAChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = FAChat;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = ED66EE342CB80C23006F6EB7 /* Project object */;
+}

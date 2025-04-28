@@ -1,0 +1,16 @@
+"chat_title" = "Чат-бот ПСБ";
+"chat_write_message" = "Введите сообщение";
+"chat_copy" = "Копировать";
+"chat_quote" = "Ответить";
+"chat_not_delivered" = "Не доставлено";
+"chat_today" = "Сегодня";
+"chat_dialog_end" = "Диалог завершен";
+"user_quote_name" = "Вы";
+"chat_error" = "Нет соединения с интернетом.\nПожалуйста, проверьте подключение.";
+"chat_update" = "Обновить";
+"chat_dialog_finish" = "Диалог завершён.\nОцените качество обслуживания";
+"chat_score_bad" = "Плохо";
+"chat_score_good" = "Хорошо";
+"chat_score_excelent" = "Отлично";
+"chat_operator_typing" = "Печатает";
+"chat_operator_connected" = "Оператор %@ подключился к диалогу";
