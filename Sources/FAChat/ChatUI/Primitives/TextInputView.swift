@@ -30,7 +30,7 @@ struct TextInputView: UIViewRepresentable {
         textView.allowsEditingTextAttributes = true
         textView.typingAttributes = textConfig.textViewAttributes
         textView.autocorrectionType = .no
-        textView.autocapitalizationType = .none
+        textView.autocapitalizationType = .sentences
         textView.maxHeight = maxHeight
         textView.textContainerInset = .init(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
         return textView

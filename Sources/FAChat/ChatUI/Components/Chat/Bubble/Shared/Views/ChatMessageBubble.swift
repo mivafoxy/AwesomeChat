@@ -32,16 +32,20 @@ struct ChatMessageBubble: UIViewRepresentable {
             quote: quote,
             menuActions: menuActions
         )
-        
+        DispatchQueue.main.async {
+            view.layoutIfNeeded()
+            
+            size = view.systemLayoutSizeFitting(
+                UIView.layoutFittingCompressedSize,
+                withHorizontalFittingPriority: .defaultLow,
+                verticalFittingPriority: .defaultHigh
+            )
+        }
         return view
     }
     
     func updateUIView(_ uiView: BubbleView, context: Context) {
         uiView.set(status: statusIcon)
-        DispatchQueue.main.async {
-            uiView.layoutIfNeeded()
-            size = uiView.sizeThatFits(CGSize(width: 279, height: Double.greatestFiniteMagnitude))
-        }
     }
 }
 
@@ -60,7 +64,9 @@ class BubbleView: UIView {
         textView.dataDetectorTypes = .all
         textView.isSelectable = true
         textView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        textView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         textView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        textView.setContentCompressionResistancePriority(.required, for: .vertical)
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
         textView.textContainerInset = .init(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
@@ -125,7 +131,11 @@ class BubbleView: UIView {
         self.setWidth(to: minWidth, relation: .greaterOrEqual)
         self.backgroundColor = backgroundColor.color
         self.translatesAutoresizingMaskIntoConstraints = false
+        self.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        self.setContentHuggingPriority(.defaultHigh, for: .horizontal)
         self.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        self.setContentCompressionResistancePriority(.required, for: .vertical)
+
         
         // MARK: - setup radius
         
@@ -157,7 +167,9 @@ class BubbleView: UIView {
             color: MRTextColor.colorTextPrimary
         )
         
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
             let wrapped = "<span style='white-space: pre-wrap;'>\(text)</span>"
             if let data = wrapped.data(using: .utf8) {
                 let attributed = try? NSMutableAttributedString(
@@ -171,9 +183,12 @@ class BubbleView: UIView {
                 let fullRange = NSRange(location: 0, length: attributed?.length ?? 0)
                 attributed?.addAttributes(messageTextConfig.textViewAttributes, range: fullRange)
                 self.messageText.attributedText = attributed
+                self.messageText.sizeToFit()
             }
         }
         
+        messageText.setWidth(to: maxWidth, relation: .lessOrEqual)
+        messageText.setWidth(to: minWidth, relation: .greaterOrEqual)
         
         // MARK: - setup status label
         

@@ -55,7 +55,6 @@ final class ChatViewModel: ObservableObject {
         }
     }
     
-    @Published private(set) var isInitialHistoryLoaded = false
     @Published private(set) var isNeedScroll = false
     @Published private(set) var state = ChatState.loading
     @Published private(set) var isRefreshing = false
@@ -144,6 +143,16 @@ final class ChatViewModel: ObservableObject {
     private func onAppear() {
         isChatTabBadgeHidden = true
         connect()
+        tryToLoadAbsentMessages()
+    }
+    
+    private func tryToLoadAbsentMessages() {
+        guard let timeZone = TimeZone(identifier: "UTC") else { return }
+        var calendar = Calendar.current
+        calendar.timeZone = timeZone
+        let tomorrow = calendar.date(byAdding: .day, value: 1, to: .now)!
+        let zeroPoint = Date.now.timeIntervalSince1970 + tomorrow.timeIntervalSinceNow
+        loader.loadHistory(with: Int(zeroPoint))
     }
     
     private func connect() {
@@ -335,10 +344,8 @@ extension ChatViewModel: FAChatEventDelegate {
             pendingMessages.forEach { sendMessage($0) }
             pendingMessages.removeAll()
         }
-        if !isInitialHistoryLoaded {
-            let zeroPoint = 0
-            loader.loadHistory(with: zeroPoint)
-        }
+        let zeroPoint = 0
+        loader.loadHistory(with: zeroPoint)
     }
     
     func didReconnect() {
@@ -382,12 +389,7 @@ extension ChatViewModel: FAChatEventDelegate {
         }
         isRefreshing = false
         guard !messages.isEmpty else { return }
-        if !self.isInitialHistoryLoaded {
-            self.isInitialHistoryLoaded.toggle()
-        }
-        
         self.append(historyMessages: messages)
-        
     }
     
     func didReceiveError(_ error: Error?, _ data: Any?) {

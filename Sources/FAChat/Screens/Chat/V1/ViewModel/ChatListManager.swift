@@ -11,8 +11,27 @@ extension ChatViewModel {
     
     func append(historyMessages: [FAChatMessage]) {
         let visitorMessages = getVisitorMessages(historyMessages)
+        
+        // При ситуации, когда приложение
+        // свёрнуто, и оператор присылает сообщения, они не отображаются
+        // Это происходит из-за того, что при свернутом приложении
+        // сокет отключается, идет переподключение, а события
+        // про новые сообщения не поступают.
+        // Без доработок бэка есть способ принудительно загрузить новые сообщения -
+        // попросить историю с timestamp = следуюший день.
+        // Это требует корректировки алгоритма добавления сообщений, чтобы новые сообщения
+        // добавлялись в правильном порядке.
+        
+        let last = getAllMessages().sorted { $0.timestamp < $1.timestamp }.last
+
         for message in visitorMessages {
-            append(oldMessage: message)
+            if let last = last {
+                if last.timestamp < message.timestamp {
+                    append(newMessage: message)
+                }
+            } else {
+                append(oldMessage: message)
+            }
         }
     }
     

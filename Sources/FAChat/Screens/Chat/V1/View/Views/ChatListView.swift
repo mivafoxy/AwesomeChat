@@ -22,6 +22,7 @@ struct ChatListView: View {
                     endEditing()
                 })
                 .offset(x: 0, y: viewModel.isRefreshing ? refreshControlHeight : .zero)
+                .coordinateSpace(name: coordinateSpace)
                 .animation(.easeIn, value: viewModel.isRefreshing)
         }
     }
@@ -58,15 +59,17 @@ struct ChatListView: View {
                             color: MRBackgroundColor.colorBackground
                         )
                         .onChange(of: viewModel.isNeedScroll) { newValue in
-                            DispatchQueue.main.async { [proxy] in
-                                withAnimation(.linear) {
-                                    proxy.scrollTo(
-                                        anchorId,
-                                        anchor: .top
-                                    )
+                            Task {
+                                await MainActor.run {
+                                    withAnimation(.linear) {
+                                        proxy.scrollTo(
+                                            anchorId,
+                                            anchor: .top
+                                        )
+                                    }
+                                    viewModel.send(.onScrolling)
                                 }
                             }
-                            viewModel.send(.onScrolling)
                         }
                         .id(anchorId)
                 }
@@ -77,7 +80,6 @@ struct ChatListView: View {
             .background {
                 listFrameGeometry
             }
-            .coordinateSpace(name: coordinateSpace)
             .rotationEffect(.degrees(180))
         }
     }
@@ -276,11 +278,16 @@ final class ScreenData: ObservableObject {
 extension ChatListView {
     
     fileprivate func detectOffset(_ proxy: GeometryProxy) {
-        let contentFrame = proxy.frame(in: .global)
+        let contentFrame = proxy.frame(in: .named(coordinateSpace))
+        
         guard contentFrame.minY >= 0 else {
             if self.screenData.isRefreshing {
                 self.screenData.set(isRefreshing: false)
             }
+            return
+        }
+        guard !viewModel.isRefreshing else {
+            screenData.set(isRefreshing: false)
             return
         }
         if Int(self.screenData.previousContentHeight) < Int(self.screenData.listFrame.height) {

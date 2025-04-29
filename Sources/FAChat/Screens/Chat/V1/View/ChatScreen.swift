@@ -67,8 +67,8 @@ extension ChatScreen {
     @ViewBuilder fileprivate var contentScreen: some View {
         VStack(spacing: .zero) {
             ZStack(alignment: .bottomTrailing) {
-                ChatListView(viewModel: viewModel)
-                downButton
+                ChatListView(viewModel: viewModel).zIndex(0)
+                downButton.zIndex(1)
             }
             quote.offset(y: 16)
             textInput
@@ -81,9 +81,13 @@ extension ChatScreen {
             newMessagesCount: $viewModel.unreadCount,
             isHidden: $viewModel.isDownButtonHidden
         )
-        .simultaneousGesture(TapGesture().onEnded {
-            viewModel.send(.onDownButtonTap)
-        })
+        .onTapGesture { }
+        .highPriorityGesture(
+            LongPressGesture(minimumDuration: 0.01)
+                .sequenced(before: DragGesture(coordinateSpace: .global))
+                .onChanged() { _ in
+                    viewModel.send(.onDownButtonTap)
+                })
     }
     
     @ViewBuilder private var quote: some View {
