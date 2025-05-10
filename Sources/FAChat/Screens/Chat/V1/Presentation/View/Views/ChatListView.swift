@@ -12,6 +12,7 @@ struct ChatListView: View {
     
     @ObservedObject var viewModel: ChatViewModel
     @StateObject private var screenData = ScreenData()
+    @State private var isContentOutOfListBounds = false
     private let coordinateSpace = "List"
     
     var body: some View {
@@ -85,7 +86,7 @@ struct ChatListView: View {
     }
     
     @ViewBuilder private var smallContentGeometry: some View {
-        if !viewModel.isContentOutOfListBounds {
+        if !isContentOutOfListBounds {
             GeometryReader { proxy in
                 Rectangle()
                     .fill(.clear)
@@ -137,12 +138,9 @@ struct ChatListView: View {
     }
     
     @ViewBuilder private func getChatDateGeometry(_ offset: Int) -> some View {
-        if
-            viewModel.isContentOutOfListBounds &&
-            offset == viewModel.dateMessageGroups.count - 1
-        {
+        if isContentOutOfListBounds && offset == viewModel.dateMessageGroups.count - 1 {
             let isLastOffset = offset == viewModel.dateMessageGroups.count - 1
-            let hasGeometryBackground = viewModel.isContentOutOfListBounds && isLastOffset
+            let hasGeometryBackground = isContentOutOfListBounds && isLastOffset
             if hasGeometryBackground {
                 GeometryReader { proxy in
                     Rectangle()
@@ -296,7 +294,6 @@ extension ChatListView {
             let listMaxY = self.screenData.listFrame.maxY
             sendRefreshEvent(contentOffset, listMaxY)
         } else {
-            viewModel.send(.onContentHeightChange(true))
             if contentFrame.height > self.screenData.previousContentHeight {
                 self.screenData.set(previousContentHeight: contentFrame.height)
             }

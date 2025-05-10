@@ -1,16 +1,18 @@
 //
-//  ChatListManager.swift
-//  
+//  ChatListManagerV2.swift
+//  FAChat
 //
-//  Created by Илья Малахов on 22.01.2025.
+//  Created by Илья Малахов on 09.05.2025.
 //
 
 import Foundation
 
-extension ChatViewModel {
+final class ChatListManager {
     
-    func append(historyMessages: [FAChatMessage]) {
-        let visitorMessages = getVisitorMessages(historyMessages)
+    private var messageIds = Set<String>()
+    
+    func append(historyMessages: [FAChatMessage], dateMessageGroups: inout [DateMessageGroup]) {
+        let visitorMessages = getVisitorMessages(historyMessages, dateMessageGroups)
         
         // При ситуации, когда приложение
         // свёрнуто, и оператор присылает сообщения, они не отображаются
@@ -22,41 +24,45 @@ extension ChatViewModel {
         // Это требует корректировки алгоритма добавления сообщений, чтобы новые сообщения
         // добавлялись в правильном порядке.
         
-        let last = getAllMessages().sorted { $0.timestamp < $1.timestamp }.last
+        let last = getAllMessages(from: dateMessageGroups)
+            .sorted { $0.timestamp < $1.timestamp }
+            .last
 
         for message in visitorMessages {
-            if let last = last {
-                if last.timestamp < message.timestamp {
-                    append(newMessage: message)
-                }
+            if let last = last, last.timestamp < message.timestamp {
+                append(newMessage: message, dateMessageGroups: &dateMessageGroups)
             } else {
-                append(oldMessage: message)
+                append(oldMessage: message, dateMessageGroups: &dateMessageGroups)
             }
         }
     }
     
-    func append(newMessages: [ChatMessage]) {
+    func append(
+        newMessages: [ChatMessage],
+        dateMessageGroups: inout [DateMessageGroup],
+        botActions: inout [ChatBotAction]
+    ) {
         for message in newMessages {
             guard !hasMessage(message) else { continue }
             messageIds.insert(message.id)
-            append(newMessage: message)
+            append(newMessage: message, dateMessageGroups: &dateMessageGroups)
         }
-        botActions = getBotActions()
+        botActions = getBotActions(from: dateMessageGroups)
     }
     
-    func append(systemMessage: ChatMessage) {
+    func append(systemMessage: ChatMessage, dateMessageGroups: inout [DateMessageGroup]) {
         guard !hasMessage(systemMessage) else { return }
         messageIds.insert(systemMessage.id)
-        append(newMessage: systemMessage)
+        append(newMessage: systemMessage, dateMessageGroups: &dateMessageGroups)
     }
     
-    func getEarliestTimestamp() -> Int {
-        let earliestMessage = getAllMessages()
+    func getEarliestTimestamp(from dateMessageGroups: [DateMessageGroup]) -> Int {
+        let earliestMessage = getAllMessages(from: dateMessageGroups)
             .min { $0.message.timestamp < $1.message.timestamp }
         return earliestMessage?.message.timestamp ?? 0
     }
     
-    func getOperatorMessages() -> [ChatMessage] {
+    func getOperatorMessages(from dateMessageGroups: [DateMessageGroup]) -> [ChatMessage] {
         dateMessageGroups
             .flatMap { $0.userMessageGroups }
             .filter {
@@ -70,7 +76,7 @@ extension ChatViewModel {
             .flatMap { $0.messages }
     }
     
-    func getBotActions() -> [ChatBotAction] {
+    func getBotActions(from dateMessageGroups: [DateMessageGroup]) -> [ChatBotAction] {
         guard let userGroup = dateMessageGroups.first?.userMessageGroups.last else {
             return []
         }
@@ -91,20 +97,17 @@ extension ChatViewModel {
         }
     }
     
-    func getAllMessages() -> [ChatMessage] {
+    func getAllMessages(from dateMessageGroups: [DateMessageGroup]) -> [ChatMessage] {
         dateMessageGroups
             .flatMap { $0.userMessageGroups }
             .flatMap { $0.messages }
     }
     
-    func setMessageStatus(with id: String, _ status: MessageReadStatus) {
-        struct MessageIndices {
-            let dateGroup: Int
-            let userGroup: Int
-            let message: Int
-        }
-        
-        let indices: MessageIndices? = dateMessageGroups
+    func getIndiciesForMessage(
+        with id: String,
+        dateMessageGroups: [DateMessageGroup]
+    ) -> (dateGroup: Int, userGroup: Int, message: Int)? {
+        let indices: (dateGroup: Int, userGroup: Int, message: Int)? = dateMessageGroups
             .enumerated()
             .lazy
             .compactMap { dateGroupIndex, dateGroup in
@@ -114,7 +117,7 @@ extension ChatViewModel {
                     }),
                     let messageIndex = dateGroup.userMessageGroups[userGroupIndex].messages.firstIndex(where: { $0.id == id })
                 {
-                    return MessageIndices(
+                    return (
                         dateGroup: dateGroupIndex,
                         userGroup: userGroupIndex,
                         message: messageIndex
@@ -124,38 +127,24 @@ extension ChatViewModel {
             }
             .first
         
-        guard let indices = indices else { return }
-        
-        let oldMessage = dateMessageGroups[indices.dateGroup]
-            .userMessageGroups[indices.userGroup]
-            .messages[indices.message]
-        let newMessage = ChatMessage(
-            message: oldMessage.message,
-            messageContent: oldMessage.content
-        )
-        newMessage.readStatus = status
-        Task.detached { @MainActor [weak self] in
-            self?.dateMessageGroups[indices.dateGroup]
-                .userMessageGroups[indices.userGroup]
-                .messages[indices.message] = newMessage
-        }
+        return indices
     }
     
-    func getFirstUnreadMessageId() -> String? {
-        getAllMessages().first { $0.readStatus == .unread }?.id
+    func getFirstUnreadMessageId(from dateMessageGroups: [DateMessageGroup]) -> String? {
+        getAllMessages(from: dateMessageGroups).first { $0.readStatus == .unread }?.id
     }
     
     // MARK: - Backward (for history) message appending
     
-    private func append(oldMessage: ChatMessage) {
+    private func append(oldMessage: ChatMessage, dateMessageGroups: inout [DateMessageGroup]) {
         if dateMessageGroups.isEmpty {
             dateMessageGroups.append(getDateGroup(with: oldMessage))
         } else {
-            insert(oldMessage: oldMessage)
+            insert(oldMessage: oldMessage, dateMessageGroups: &dateMessageGroups)
         }
     }
     
-    private func insert(oldMessage: ChatMessage) {
+    private func insert(oldMessage: ChatMessage, dateMessageGroups: inout [DateMessageGroup]) {
         guard
             let timeZone = TimeZone(identifier: "UTC"),
             let oldDateGroup = dateMessageGroups.last?.date.startOfDay(),
@@ -169,13 +158,13 @@ extension ChatViewModel {
         let messageDate = oldMessage.message.getTimestamp().startOfDay()
         
         if calendar.isDate(messageDate, inSameDayAs: oldDateGroup) {
-            appendToBack(oldMessage: oldMessage)
+            appendToBack(oldMessage: oldMessage, dateMessageGroups: &dateMessageGroups)
         } else {
             dateMessageGroups.append(getDateGroup(with: oldMessage))
         }
     }
     
-    private func appendToBack(oldMessage: ChatMessage) {
+    private func appendToBack(oldMessage: ChatMessage, dateMessageGroups: inout [DateMessageGroup]) {
         let userGroup = dateMessageGroups.last?.userMessageGroups.first
         let lastDateGroup = dateMessageGroups.count - 1
         let lastUserGroup = 0
@@ -196,15 +185,15 @@ extension ChatViewModel {
     
     // MARK: - Forward message appending
     
-    private func append(newMessage: ChatMessage) {
+    private func append(newMessage: ChatMessage, dateMessageGroups: inout [DateMessageGroup]) {
         if dateMessageGroups.isEmpty {
             dateMessageGroups.append(getDateGroup(with: newMessage))
         } else {
-            appendForwardly(message: newMessage)
+            appendForwardly(message: newMessage, dateMessageGroups: &dateMessageGroups)
         }
     }
     
-    private func appendForwardly(message: ChatMessage) {
+    private func appendForwardly(message: ChatMessage, dateMessageGroups: inout [DateMessageGroup]) {
         guard
             let timeZone = TimeZone(identifier: "UTC"),
             let newestDateGroup = dateMessageGroups.first?.date.startOfDay()
@@ -215,13 +204,13 @@ extension ChatViewModel {
         calendar.timeZone = timeZone
         let messageDate = message.message.getTimestamp().startOfDay()
         if calendar.isDate(messageDate, inSameDayAs: newestDateGroup) {
-            append(message: message, toDateGroup: 0)
+            append(message: message, toDateGroup: 0, dateMessageGroups: &dateMessageGroups)
         } else {
             dateMessageGroups.insert(getDateGroup(with: message), at: 0)
         }
     }
     
-    private func append(message: ChatMessage, toDateGroup: Int) {
+    private func append(message: ChatMessage, toDateGroup: Int, dateMessageGroups: inout [DateMessageGroup]) {
         let lastMessageAuthor = dateMessageGroups[toDateGroup].userMessageGroups.last?.author
         if lastMessageAuthor == message.message.author {
             let lastUserGroup = dateMessageGroups[toDateGroup].userMessageGroups.count - 1
@@ -253,7 +242,10 @@ extension ChatViewModel {
         MessageGroup(id: UUID().uuidString, author: message.message.author, messages: [message])
     }
     
-    private func getVisitorMessages(_ messages: [FAChatMessage]) -> [ChatMessage] {
+    private func getVisitorMessages(
+        _ messages: [FAChatMessage],
+        _ dateMessageGroups: [DateMessageGroup]
+    ) -> [ChatMessage] {
         let allMessages = dateMessageGroups
             .flatMap { $0.userMessageGroups }
             .flatMap { $0.messages }
