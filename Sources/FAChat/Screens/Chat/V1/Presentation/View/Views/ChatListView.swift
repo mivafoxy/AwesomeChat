@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 struct ChatListView: View {
     
@@ -56,9 +55,7 @@ struct ChatListView: View {
             ScrollView(showsIndicators: false) {
                 LazyVStack {
                     dateGroupViews
-                        .foregroundColor(
-                            color: MRBackgroundColor.colorBackground
-                        )
+                        .foregroundStyle(.background)
                         .onChange(of: viewModel.isNeedScroll) { newValue in
                             Task {
                                 await MainActor.run {
@@ -90,7 +87,7 @@ struct ChatListView: View {
             GeometryReader { proxy in
                 Rectangle()
                     .fill(.clear)
-                    .onChange(of: proxy.frame(in: .named(coordinateSpace)).minY) { _ in
+                    .onChange(of: proxy.frame(in: .named(coordinateSpace)).minY) {
                         detectOffset(proxy)
                     }
             }
@@ -104,7 +101,7 @@ struct ChatListView: View {
                     guard !viewModel.isRefreshing else { return }
                     detectListFrame(proxy)
                 }
-                .onChange(of: proxy.frame(in: .global)) { _ in
+                .onChange(of: proxy.frame(in: .global)) {
                     guard !viewModel.isRefreshing else { return }
                     detectListFrame(proxy)
                 }
@@ -150,8 +147,8 @@ struct ChatListView: View {
                         }
                         .onChange(
                             of: proxy.frame(in: .named(coordinateSpace))
-                        ) { value in
-                            guard value.height > 0 else { return }
+                        ) { oldValue, newValue in
+                            guard newValue.height > 0 else { return }
                             detectOffset(proxy)
                         }
                 }
@@ -234,7 +231,7 @@ struct ChatListView: View {
                     }
                     .onChange(
                         of: proxy.frame(in: .global)
-                    ) { frame in
+                    ) { _, frame in
                         let bottomY = screenData.listFrame.maxY
                         let anchorY = frame.maxY
                         viewModel.send(.onAnchorChange(anchorY - bottomY))

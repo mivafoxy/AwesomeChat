@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 struct UserBubbleView: View {
     
@@ -21,7 +20,7 @@ struct UserBubbleView: View {
                 statusSubtitle: message.timestampString,
                 statusIcon: message.readStatus.icon,
                 quote: getQuote(message),
-                contextActions: getMessageContextActions(message.id)
+                contextActions: [getMessageContextActions(message.id)]
             ),
             cornerRadiusSet: RadiusSet(
                 topLeftRadius: 12.0,
@@ -59,8 +58,7 @@ struct UserBubbleView: View {
         }
     }
     
-    @MRBuilder<ChatContextAction>
-    private func getMessageContextActions(_ messageId: String) -> [ChatContextAction] {
+    private func getMessageContextActions(_ messageId: String) -> ChatContextAction {
         ChatContextAction(
             title: "chat_copy".localized,
             icon: UIImage(systemName: "doc.on.doc")
@@ -86,5 +84,16 @@ struct ChatUserBubblesView: View {
     
     private func getUserMessages() -> [UserMessage] {
         userMessageGroup.messages.compactMap { UserMessage(message: $0) }
+    }
+}
+
+extension MessageReadStatus {
+    var icon: Image {
+        switch self {
+        case .read:
+            return Image(systemName: "")
+        case .unread:
+            return Image(systemName: "")
+        }
     }
 }

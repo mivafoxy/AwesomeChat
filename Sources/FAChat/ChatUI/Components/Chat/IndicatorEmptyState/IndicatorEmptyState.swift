@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 struct IndicatorEmptyState: View {
     
@@ -19,25 +18,23 @@ struct IndicatorEmptyState: View {
             Spacer()
                 .frame(maxHeight: 104.0)
             Text("🤷‍♂️")
-                .font(fontStyle: .largeTitle1)
-                .foregroundColor(color: MRTextColor.colorTextPrimary)
+                .font(.largeTitle)
+                .foregroundStyle(.primary)
                 .frame(alignment: .center)
             Spacer()
                 .frame(maxHeight: 48.0)
             Text(title)
-                .font(fontStyle: .subheadline3)
-                .foregroundColor(color: MRTextColor.colorTextPrimary)
+                .font(.subheadline)
+                .foregroundStyle(.primary)
                 .multilineTextAlignment(.center)
             Spacer()
             Button(action: buttonAction, label: {
                 RoundedRectangle(cornerRadius: 12.0)
-                    .foregroundColor(
-                        color: MRButtonsColor.colorButtonPrimarySecondNormal.color
-                    )
+                    .foregroundStyle(.primary)
                     .overlay {
                         Text(buttonText)
-                            .font(fontStyle: .body2)
-                            .foregroundColor(color: MRElementsColor.colorOnPrimary)
+                            .font(.body)
+                            .foregroundStyle(.primary)
                     }
             })
                 .frame(height: 52.0, alignment: .center)

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 struct ChatRemoteOperatorBubblesView: View {
     
@@ -96,19 +95,20 @@ struct ChatRemoteOperatorBubblesView: View {
         }
     }
     
-    @MRBuilder<ChatContextAction>
     private func getMessageContextActions(_ message: OperatorMessage) -> [ChatContextAction] {
-        ChatContextAction(
-            title: "chat_copy".localized,
-            icon: UIImage(systemName: "doc.on.doc")
-        ) { (text, _) in
-            UIPasteboard.general.string = text
-        }
-        ChatContextAction(
-            title: "chat_quote".localized,
-            icon: UIImage(systemName: "arrowshape.turn.up.backward")
-        ) { (_, _) in
-            onContextAction(message.id)
-        }
+        [
+            ChatContextAction(
+                title: "chat_copy".localized,
+                icon: UIImage(systemName: "doc.on.doc")
+            ) { (text, _) in
+                UIPasteboard.general.string = text
+            },
+            ChatContextAction(
+                title: "chat_quote".localized,
+                icon: UIImage(systemName: "arrowshape.turn.up.backward")
+            ) { (_, _) in
+                onContextAction(message.id)
+            }
+        ]
     }
 }

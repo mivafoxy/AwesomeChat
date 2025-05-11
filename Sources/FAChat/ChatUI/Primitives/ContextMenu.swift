@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SnapKit
 
 extension View {
     func contextMenu(actions: [UIAction]) -> some View {
@@ -98,7 +99,9 @@ private struct InteractionView<Content: View>: UIViewRepresentable {
             
             view.translatesAutoresizingMaskIntoConstraints = false
             interactionView.addSubview(view)
-            view.pinToSuperviewEdges()
+            view.snp.makeConstraints { (make) -> Void in
+                make.edges.equalToSuperview()
+            }
             view.isHidden = true
             
             let parameters = UIPreviewParameters()

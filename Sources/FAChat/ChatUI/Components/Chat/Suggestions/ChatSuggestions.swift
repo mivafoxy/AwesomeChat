@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 public struct ChatSuggestions: View {
     
@@ -38,14 +37,14 @@ public struct ChatSuggestions: View {
     
     private func makeSuggestionItem(_ action: ChatSuggestionAction) -> some View {
         Text(action.title)
-            .font(fontStyle: .subheadline11)
-            .foregroundColor(color: MRElementsColor.colorPrimary)
+            .font(.subheadline)
+            .foregroundStyle(.primary)
             .padding(.horizontal, 12.0)
             .padding(.vertical, 8.0)
             .overlay {
                 RoundedRectangle(cornerRadius: 12.0)
                     .strokeBorder(
-                        Color(MRElementsColor.colorPrimary.color),
+                        Color(.systemGray),
                         lineWidth: 1
                     )
             }

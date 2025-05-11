@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 public struct ChatTyping: View {
     
@@ -30,11 +29,11 @@ public struct ChatTyping: View {
     public var body: some View {
         HStack(spacing: .zero) {
             Text("🧑🏻‍💻")
-                .font(fontStyle: .caption1)
-                .foregroundColor(color: MRTextColor.colorTextCaption)
+                .font(.caption)
+                .foregroundStyle(.black)
             Text(typoText)
-                .font(fontStyle: .caption1)
-                .foregroundColor(color: MRTextColor.colorTextCaption)
+                .font(.caption)
+                .foregroundStyle(.black)
             animatedDots
         }
     }
@@ -50,7 +49,7 @@ public struct ChatTyping: View {
                     
                     Text(".")
                         .font(.system(size: baseFontSize))
-                        .foregroundColor(color: MRTextColor.colorTextCaption)
+                        .foregroundStyle(.black)
                         .scaleEffect(scale)
                         .opacity(opacity)
                 }

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 public struct ChatButtonTooltipBanner: View {
     
@@ -22,12 +21,12 @@ public struct ChatButtonTooltipBanner: View {
             ForEach(1..<(maxRatingCount + 1)) { i in
                 Image(
                     uiImage: i <= filledStars ?
-                    Asset.Size40.Rating.StarFill.imageValue :
-                    Asset.Size40.Rating.StarOutline.imageValue
+                    Image(systemName: "star").getUIImage(newSize: CGSize(width: 40, height: 40)) :
+                    Image(systemName: "star.fill").getUIImage(newSize: CGSize(width: 40, height: 40))
                 )
                     .resizable()
                     .scaledToFit()
-                    .foregroundColor(color: MRButtonsColor.colorButtonPrimarySecondNormal)
+                    .foregroundStyle(.orange)
                     .frame(maxWidth: .infinity, idealHeight: 40, maxHeight: 40, alignment: .center)
                     .onTapGesture {
                         filledStars = i

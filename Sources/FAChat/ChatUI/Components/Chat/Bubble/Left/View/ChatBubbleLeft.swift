@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 public struct ChatBubbleLeft: View {
     
@@ -66,7 +65,7 @@ public struct ChatBubbleLeft: View {
             ChatAvatarLetter(userName: userName)
         } else {
             Rectangle()
-                .foregroundColor(.clear)
+                .foregroundStyle(.clear)
                 .frame(width: 20, height: 20)
         }
     }

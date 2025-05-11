@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 struct ChatBottomSheetView: View {
     
@@ -17,15 +16,15 @@ struct ChatBottomSheetView: View {
         VStack(spacing: 10) {
             HStack(alignment: .top, spacing: .zero) {
                 Text("chat_dialog_finish".localized)
-                    .font(fontStyle: .body1)
+                    .font(.body)
                     .multilineTextAlignment(.leading)
                     .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(EdgeInsets(top: 12, leading: 24, bottom: 16, trailing: 0))
                 
-                Image(uiImage: Asset.Size16.UI.SmallClose2.imageValue)
+                Image(systemName: "xmark.circle")
                     .resizable()
-                    .foregroundColor(color: MRElementsColor.colorElementsPrimary)
+                    .foregroundStyle(.primary)
                     .frame(width: 16, height: 16, alignment: .center)
                     .padding(EdgeInsets(top: 6.0, leading: 17, bottom: 0.0, trailing: 20.0))
                     .onTapGesture {
@@ -52,7 +51,7 @@ struct ChatBottomSheetView: View {
                     id: \.self
                 ) { label in
                     Text(label)
-                        .font(fontStyle: .caption1)
+                        .font(.caption)
                         .frame(maxWidth: .infinity, alignment: .center)
                 }
             }

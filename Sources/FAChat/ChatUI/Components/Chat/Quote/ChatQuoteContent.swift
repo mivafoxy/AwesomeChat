@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 struct ChatQuoteContent: View {
     
-    var image: MRImage? = nil
-    var fileImage: MRImage? = nil
+    var image: Image? = nil
+    var fileImage: Image? = nil
     var title: String
     var content: String
     
@@ -27,7 +26,7 @@ struct ChatQuoteContent: View {
         
     private var verticalRect: some View {
         RoundedRectangle(cornerRadius: 2.0)
-            .foregroundColor(color: MRElementsColor.colorPrimaryHover)
+            .foregroundStyle(.primary)
             .frame(
                 width: 3.0,
                 height: 34.0
@@ -35,7 +34,7 @@ struct ChatQuoteContent: View {
     }
     
     private var imageView: some View {
-        ImageView(mrImage: image)
+        image
             .frame(width: 30.0, height: 30.0)
             .clipShape(
                 RoundedRectangle(
@@ -45,12 +44,12 @@ struct ChatQuoteContent: View {
     }
     
     private var fileImageView: some View {
-        ImageView(mrImage: fileImage)
+        fileImage
             .frame(
                 width: 32.0,
                 height: 32.0
             )
-            .foregroundColor(color: MRElementsColor.colorPrimary)
+            .foregroundStyle(.primary)
     }
     
     private var textContent: some View {
@@ -59,15 +58,15 @@ struct ChatQuoteContent: View {
             spacing: 2.0
         ) {
             Text(title)
-                .font(fontStyle: .caption1)
+                .font(.caption)
                 .lineLimit(1)
                 .truncationMode(.tail)
-                .foregroundColor(color: MRElementsColor.colorPrimaryHover)
+                .foregroundStyle(.primary)
             Text(content)
-                .font(fontStyle: .caption1)
+                .font(.caption2)
                 .lineLimit(1)
                 .truncationMode(.tail)
-                .foregroundColor(color: MRTextColor.colorTextPrimary)
+                .foregroundStyle(.primary)
         }
     }
 }

@@ -7,7 +7,6 @@
 
 import Combine
 import SwiftUI
-import MRDSKit
 
 public struct ChatRightMessage: Identifiable {
     
@@ -15,7 +14,7 @@ public struct ChatRightMessage: Identifiable {
     
     public let text: String
     public let statusSubtitle: String
-    public let statusIcon: MRImage?
+    public let statusIcon: Image?
     public let quote: ChatBubbleQuote?
     public let contextActions: [ChatContextAction]
     
@@ -23,7 +22,7 @@ public struct ChatRightMessage: Identifiable {
         id: String = UUID().uuidString,
         text: String,
         statusSubtitle: String,
-        statusIcon: MRImage? = nil,
+        statusIcon: Image? = nil,
         quote: ChatBubbleQuote? = nil,
         contextActions: [ChatContextAction] = []
     ) {

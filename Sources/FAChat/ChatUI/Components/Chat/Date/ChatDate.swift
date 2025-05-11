@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 public struct ChatDate: View {
     
@@ -19,8 +18,8 @@ public struct ChatDate: View {
     public var body: some View {
         HStack(alignment: .center) {
             Text(text)
-                .font(fontStyle: .caption1)
-                .foregroundColor(color: MRTextColor.colorTextCaption)
+                .font(.caption)
+                .foregroundStyle(.secondary)
                 .padding(.vertical, 8.0)
         }
     }

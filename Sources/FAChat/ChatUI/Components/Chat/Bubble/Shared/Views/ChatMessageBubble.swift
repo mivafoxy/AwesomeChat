@@ -7,17 +7,17 @@
 
 import UIKit
 import Foundation
-import MRDSKit
 import SwiftUI
+import SnapKit
 
 struct ChatMessageBubble: UIViewRepresentable {
     
     @Binding var size: CGSize
-    var statusIcon: MRImage?
+    var statusIcon: UIImage?
     let radiusSet: RadiusSet
     let text: String
     let statusSubtitle: String
-    let background: IMRColor
+    let background: UIColor
     var quote: ChatBubbleQuote? = nil
     let menuActions: [UIAction]
     
@@ -81,8 +81,8 @@ class BubbleView: UIView {
         return label
     }()
     
-    private let statusIcon: MRImageView = {
-        let image = MRImageView()
+    private let statusIcon: UIImageView = {
+        let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -93,7 +93,7 @@ class BubbleView: UIView {
     private var topRightRadius: CGFloat = 0
     private var bottomLeftRadius: CGFloat = 0
     private var bottomRightRadius: CGFloat = 0
-    private var textTopConstraint: NSLayoutConstraint?
+    private var textTopConstraint: Constraint?
     
     private var contextActions: [UIAction] = []
     
@@ -115,8 +115,8 @@ class BubbleView: UIView {
     }
     
     func setupView(
-        backgroundColor: IMRColor,
-        statusImage: MRImage?,
+        backgroundColor: UIColor,
+        statusImage: UIImage?,
         radiusSet: RadiusSet,
         text: String,
         statusSubtitle: String,
@@ -126,10 +126,14 @@ class BubbleView: UIView {
         // MARK: - setup self
         
         let maxWidth = 279.0
-        self.setWidth(to: maxWidth, relation: .lessOrEqual)
+        self.snp.makeConstraints { (make) -> Void in
+            make.width.lessThanOrEqualTo(maxWidth)
+        }
         let minWidth = 50.0
-        self.setWidth(to: minWidth, relation: .greaterOrEqual)
-        self.backgroundColor = backgroundColor.color
+        self.snp.makeConstraints { (make) -> Void in
+            make.width.greaterThanOrEqualTo(minWidth)
+        }
+        self.backgroundColor = backgroundColor
         self.translatesAutoresizingMaskIntoConstraints = false
         self.setContentHuggingPriority(.defaultHigh, for: .vertical)
         self.setContentHuggingPriority(.defaultHigh, for: .horizontal)
@@ -153,19 +157,12 @@ class BubbleView: UIView {
         // MARK: - setup text view
         
         addSubview(messageText)
-        messageText.pinToSuperview(
-            edges: [
-                .left(.ds12, targetEdge: .left),
-                .right(.ds12, targetEdge: .right),
-                .bottom(.ds18, targetEdge: .bottom),
-            ]
-        )
-        textTopConstraint = messageText.pinToSuperview(edge: .top(.ds12, targetEdge: .top))
-        
-        let messageTextConfig = MRTextConfig(
-            style: .callout3,
-            color: MRTextColor.colorTextPrimary
-        )
+        messageText.snp.makeConstraints { (make) -> Void in
+            make.left.equalToSuperview().offset(12)
+            make.right.equalToSuperview().offset(12)
+            make.bottom.equalToSuperview().offset(18)
+            textTopConstraint = make.top.equalToSuperview().offset(12).constraint
+        }
         
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
@@ -181,47 +178,44 @@ class BubbleView: UIView {
                     documentAttributes: nil
                 )
                 let fullRange = NSRange(location: 0, length: attributed?.length ?? 0)
-                attributed?.addAttributes(messageTextConfig.textViewAttributes, range: fullRange)
                 self.messageText.attributedText = attributed
                 self.messageText.sizeToFit()
             }
         }
         
-        messageText.setWidth(to: maxWidth, relation: .lessOrEqual)
-        messageText.setWidth(to: minWidth, relation: .greaterOrEqual)
+        messageText.snp.makeConstraints { (make) -> Void in
+            make.width.lessThanOrEqualTo(maxWidth)
+            make.width.greaterThanOrEqualTo(minWidth)
+        }
         
         // MARK: - setup status label
         
         addSubview(statusText)
-        statusText.pinToSuperview(
-            edges: [
-                .left(
-                    .ds1,
-                    targetEdge: .left,
-                    relation: .greaterOrEqual
-                ),
-                .right(
-                    statusImage == nil ? .ds12 : .ds32,
-                    targetEdge: .right
-                ),
-                .bottom(.ds6, targetEdge: .bottom)
-            ]
-        )
-        let statusConfig = MRTextConfig(style: .caption2, color: MRTextColor.colorTextCaption)
-        statusText.attributedText = statusSubtitle.makeAttributedString(with: statusConfig)
+        statusText.snp.makeConstraints { (make) -> Void in
+            make.left.greaterThanOrEqualToSuperview().offset(1)
+            
+            let rightOffset = statusImage == nil ? 12 : 32
+            make.right.equalToSuperview().offset(rightOffset)
+            
+            make.bottom.equalToSuperview().offset(6)
+        }
+ 
+        statusText.text = statusSubtitle
         statusText.sizeToFit()
         
         // MARK: - setup status icon
         
         addSubview(statusIcon)
-        statusIcon.pinToSuperview(edges: [
-            .right(.ds12, targetEdge: .right),
-            .bottom(.ds4, targetEdge: .bottom)
-        ])
-        statusIcon.setHeight(to: 16.0)
-        statusIcon.setWidth(to: 16.0)
+        
+        statusIcon.snp.makeConstraints { (make) -> Void in
+            make.right.equalToSuperview().offset(12)
+            make.bottom.equalToSuperview().offset(4)
+            make.height.equalTo(16)
+            make.width.equalTo(16)
+        }
+        
         statusIcon.contentMode = .scaleAspectFit
-        statusIcon.set(image: statusImage)
+        statusIcon.image = statusImage
         
         // MARK: - add quote if needed
         
@@ -245,24 +239,21 @@ class BubbleView: UIView {
         quote.backgroundColor = .clear
         
         addSubview(quote)
-        quote.pinToSuperview(
-            edges: [
-                .left(.ds12),
-                .top(.ds12),
-                .right(.ds12)
-            ]
-        )
-        quote.setHeight(to: 42.0)
+        quote.snp.makeConstraints { (make) -> Void in
+            make.left.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(12)
+            make.right.equalToSuperview().offset(12)
+            make.height.equalTo(42)
+        }
         
         textTopConstraint?.isActive = false
-        textTopConstraint = messageText.pin(
-            edge: .top(.ds8, targetEdge: .bottom),
-            to: quote
-        )
+        messageText.snp.makeConstraints { (make) -> Void in
+            textTopConstraint = make.top.equalTo(quote.snp.bottom).offset(8).constraint
+        }
     }
     
-    func set(status icon: MRImage?) {
-        statusIcon.set(image: icon)
+    func set(status icon: UIImage?) {
+        statusIcon.image = icon
     }
     
     // MARK: - Helpers

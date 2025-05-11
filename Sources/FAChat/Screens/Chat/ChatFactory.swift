@@ -6,7 +6,6 @@
 
 import UIKit
 import SwiftUI
-import MCChatAPI
 
 protocol ChatFactory {
     static func makeChat(input: FAChatInput) -> UIViewController

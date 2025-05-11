@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 public struct ChatDialogStatus: View {
     
@@ -19,10 +18,10 @@ public struct ChatDialogStatus: View {
     public var body: some View {
         HStack(alignment: .center) {
             Text(text)
-                .font(fontStyle: .caption1)
+                .font(.caption)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-                .foregroundColor(color: MRTextColor.colorTextCaption)
+                .foregroundStyle(.cyan)
                 .padding(.horizontal, 48.0)
                 .padding(.vertical, 12.0)
         }

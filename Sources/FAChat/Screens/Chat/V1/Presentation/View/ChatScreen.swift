@@ -8,7 +8,6 @@
 import SwiftUI
 import Combine
 import UIKit
-import MRDSKit
 
 struct ChatScreen: View {
     
@@ -20,7 +19,7 @@ struct ChatScreen: View {
             headerView
             makeChatScreen()
         }
-        .background(Color(MRBackgroundColor.colorBackground.color))
+        .background(Color.accentColor)
         .onAppear {
             viewModel.send(.onAppear)
         }
@@ -35,11 +34,11 @@ struct ChatScreen: View {
     
     private var headerView: some View {
         Text("chat_title".localized)
-            .font(fontStyle: .subheadline12)
+            .font(.subheadline)
             .padding(.vertical, 10)
             .frame(alignment: .center)
             .background {
-                Rectangle().fill(Color(MRBackgroundColor.colorBackground.color))
+                Rectangle().fill(Color.blue)
             }
     }
     

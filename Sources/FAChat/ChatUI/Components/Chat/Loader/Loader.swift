@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 public struct Loader: View {
     
@@ -16,7 +15,7 @@ public struct Loader: View {
         Circle()
             .trim(from: 0.5, to: 1)
             .stroke(
-                Color(MRElementsColor.colorPrimary.color),
+                Color(.magenta),
                 style: StrokeStyle(lineWidth: 4, lineCap: .round)
             )
             .frame(width: 28, height: 28)
@@ -33,7 +32,7 @@ public struct Loader: View {
             .background {
                 Circle()
                     .stroke(
-                        Color(MRElementsColor.colorElementsThird.color),
+                        Color(.systemGray),
                         style: StrokeStyle(lineWidth: 4, lineCap: .round)
                     )
             }

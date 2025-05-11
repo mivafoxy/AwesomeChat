@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 struct ChatMessageLeftBubble: View {
     
@@ -21,7 +20,7 @@ struct ChatMessageLeftBubble: View {
                 radiusSet: radiusSet,
                 text: message.text,
                 statusSubtitle: message.statusSubtitle,
-                background: MRBackgroundColor.colorOnBackgroundFirst,
+                background: .cyan,
                 quote: message.quote,
                 menuActions: message.contextActions.compactMap { action in
                     UIAction(title: action.title, image: action.icon) { _ in

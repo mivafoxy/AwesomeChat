@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 struct ChatAvatarLetter: View {
     
@@ -18,11 +17,11 @@ struct ChatAvatarLetter: View {
                 width: 20.0,
                 height: 20.0
             )
-            .foregroundColor(color: MRElementsColor.colorElementsSelect)
+            .foregroundStyle(.cyan)
             .overlay {
                 Text(userName.prefix(1))
-                    .font(fontStyle: .subheadline3)
-                    .foregroundColor(color: MRTextColor.colorTextLink)
+                    .font(.subheadline)
+                    .foregroundStyle(.link)
             }
     }
 }

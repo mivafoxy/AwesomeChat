@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import MRDSKit
 
 // MARK: - Common message
 
@@ -147,15 +146,6 @@ enum MessageAuthor: Equatable {
 enum MessageReadStatus {
     case read
     case unread
-    
-    var icon: MRImage {
-        switch self {
-        case .read:
-            return Asset.Size16.Service.SmallStatusRead
-        case .unread:
-            return Asset.Size16.Service.SmallStatusUnread
-        }
-    }
 }
 
 // MARK: - MCChatMessageProtocol+Helper

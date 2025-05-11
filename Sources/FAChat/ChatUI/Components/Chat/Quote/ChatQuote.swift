@@ -6,21 +6,20 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 public struct ChatQuote: View {
     
     public let title: String
     public let content: String
-    public let image: MRImage?
-    public let fileImage: MRImage?
+    public let image: Image?
+    public let fileImage: Image?
     public let onCloseTap: (() -> Void)?
     
     public init(
         title: String,
         content: String,
-        image: MRImage? = nil,
-        fileImage: MRImage? = nil,
+        image: Image? = nil,
+        fileImage: Image? = nil,
         onCloseTap: (() -> Void)? = nil
     ) {
         self.title = title
@@ -48,11 +47,7 @@ public struct ChatQuote: View {
     }
     
     private var close: some View {
-        ImageView(
-            mrImage: Asset.Size16.UI.SmallCloseFilled.with(
-                tintColor: nil,
-                andBackground: .fillColor(MRBackgroundColor.colorOnBackgroundFourth))
-        )
+        Image("xmark.app")
             .frame(
                 width: 16.0,
                 height: 16.0

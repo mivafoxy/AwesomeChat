@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 public struct ChatDownButton: View {
     
@@ -19,13 +18,11 @@ public struct ChatDownButton: View {
     public var body: some View {
         Circle()
             .frame(width: 32, height: 32)
-            .foregroundColor(
-                color: MRBackgroundColor.colorOnBackgroundThird
-            )
+            .foregroundStyle(.black)
         .overlay {
             VStack(spacing: .zero) {
                 Spacer().frame(height: 6)
-                ImageView(mrImage: Asset.Size24.Service.ServiceArrowNormal)
+                Circle()
                     .frame(
                         width: 24,
                         height: 24,
@@ -45,15 +42,11 @@ public struct ChatDownButton: View {
     private var messageCounter: some View {
         if newMessagesCount > 0 {
             counterShape
-                .foregroundColor(
-                    color: MRStatusColor.colorStatusCriticalError
-                )
+                .foregroundStyle(.red)
                 .overlay {
                     Text("\(newMessagesCount < 100 ? newMessagesCount : 99)")
-                        .font(fontStyle: .caption1)
-                        .foregroundColor(
-                            color: MRBackgroundColor.colorBackground
-                        )
+                        .font(.caption)
+                        .foregroundStyle(.background)
                         .frame(width: 16, height: 16, alignment: .center)
                 }
         }

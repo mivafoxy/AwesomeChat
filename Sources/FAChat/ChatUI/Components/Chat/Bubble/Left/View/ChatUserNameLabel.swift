@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 struct ChatUserNameLabel: View {
     
@@ -14,8 +13,8 @@ struct ChatUserNameLabel: View {
     
     var body: some View {
         Text(userName)
-            .font(fontStyle: .caption1)
-            .foregroundColor(color: MRTextColor.colorTextCaption)
+            .font(.caption)
+            .foregroundStyle(.primary)
     }
 }
 

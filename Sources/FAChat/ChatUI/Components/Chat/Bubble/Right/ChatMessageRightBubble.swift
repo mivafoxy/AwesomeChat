@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 struct ChatMessageRightBubble: View {
     
@@ -18,11 +17,11 @@ struct ChatMessageRightBubble: View {
         VStack(alignment: .leading, spacing: .zero) {
             ChatMessageBubble(
                 size: $textSize,
-                statusIcon: message.statusIcon,
+                statusIcon: message.statusIcon?.getUIImage(newSize: CGSize(width: 16, height: 16)),
                 radiusSet: radiusSet,
                 text: message.text,
                 statusSubtitle: message.statusSubtitle,
-                background: MRBackgroundColor.colorBackgroundPaid,
+                background: UIColor(.mint),
                 quote: message.quote,
                 menuActions: message.contextActions.compactMap { action in
                     UIAction(title: action.title, image: action.icon) { _ in

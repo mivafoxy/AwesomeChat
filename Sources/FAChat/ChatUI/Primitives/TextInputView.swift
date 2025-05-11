@@ -8,15 +8,11 @@
 import Foundation
 import SwiftUI
 import UIKit
-import MRDSKit
 
 struct TextInputView: UIViewRepresentable {
     
-    @Binding
-    var text: String
-    
-    var placeholder: MRString = ""
-    var textConfig: MRTextConfig
+    @Binding var text: String
+    var placeholder: String = ""
     var maxHeight: CGFloat
         
     public func makeUIView(context: Context) -> UITextView {
@@ -28,7 +24,6 @@ struct TextInputView: UIViewRepresentable {
         textView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
         textView.setContentHuggingPriority(.defaultHigh, for: .vertical)
         textView.allowsEditingTextAttributes = true
-        textView.typingAttributes = textConfig.textViewAttributes
         textView.autocorrectionType = .no
         textView.autocapitalizationType = .sentences
         textView.maxHeight = maxHeight
@@ -37,10 +32,8 @@ struct TextInputView: UIViewRepresentable {
     }
     
     func updateUIView(_ uiView: UITextView, context: Context) {
-        let newValue: MRString = text
-        uiView.attributedText = newValue.makeAttributedString(
-            with: textConfig.textViewAttributes
-        )
+        let newValue = text
+        uiView.text = newValue
     }
     
     func makeCoordinator() -> Coordinator {

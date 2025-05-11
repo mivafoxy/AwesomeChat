@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import MRDSKit
 
 public struct ChatBottomSheet<Content: View>: View {
     
@@ -21,7 +20,7 @@ public struct ChatBottomSheet<Content: View>: View {
             .frame(maxWidth: .infinity, alignment: .bottom)
             .background {
                 Rectangle()
-                    .foregroundColor(color: MRBackgroundColor.colorBackground)
+                    .foregroundStyle(.background)
             }
     }
 }
@@ -36,7 +35,7 @@ struct BottomSheetModifier<SheetContent: View>: ViewModifier {
     func body(content: Content) -> some View {
         ZStack(alignment: .bottom) {
             Rectangle()
-                .fill(Color(MRBackgroundColor.colorBackground.color))
+                .fill(.background)
                 .overlay {
                     content.allowsHitTesting(isHidden)
                 }
