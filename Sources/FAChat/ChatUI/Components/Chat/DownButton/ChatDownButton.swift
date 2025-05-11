@@ -18,16 +18,18 @@ public struct ChatDownButton: View {
     public var body: some View {
         Circle()
             .frame(width: 32, height: 32)
-            .foregroundStyle(.black)
+            .foregroundStyle(.fill)
         .overlay {
             VStack(spacing: .zero) {
                 Spacer().frame(height: 6)
-                Circle()
+                Image(systemName: "arrow.down")
+                    .resizable()
                     .frame(
-                        width: 24,
-                        height: 24,
+                        width: 16,
+                        height: 16,
                         alignment: .center
                     )
+                    .foregroundStyle(.secondary)
             }
         }
         .overlay {
@@ -70,4 +72,9 @@ public struct ChatDownButton: View {
                 )
         }
     }
+}
+
+#Preview {
+    @Previewable @State var count = 1
+    ChatDownButton(newMessagesCount: $count)
 }

@@ -28,6 +28,7 @@ struct TextInputView: UIViewRepresentable {
         textView.autocapitalizationType = .sentences
         textView.maxHeight = maxHeight
         textView.textContainerInset = .init(top: 8.0, left: 8.0, bottom: 8.0, right: 8.0)
+        textView.font = .systemFont(ofSize: 16.0)
         return textView
     }
     

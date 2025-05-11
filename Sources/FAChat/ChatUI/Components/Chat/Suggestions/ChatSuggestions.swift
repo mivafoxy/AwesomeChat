@@ -42,9 +42,9 @@ public struct ChatSuggestions: View {
             .padding(.horizontal, 12.0)
             .padding(.vertical, 8.0)
             .overlay {
-                RoundedRectangle(cornerRadius: 12.0)
+                RoundedRectangle(cornerRadius: 6.0)
                     .strokeBorder(
-                        Color(.systemGray),
+                        Color(.label),
                         lineWidth: 1
                     )
             }
@@ -52,4 +52,14 @@ public struct ChatSuggestions: View {
                 action.onTap(action.title)
             }))
     }
+}
+
+#Preview {
+    ChatSuggestions(suggestions: [
+        .init(title: "Первый", onTap: { _ in }),
+        .init(title: "Первый", onTap: { _ in }),
+        .init(title: "Первый", onTap: { _ in }),
+        .init(title: "Первый", onTap: { _ in }),
+        .init(title: "Первый", onTap: { _ in })
+    ])
 }

@@ -158,10 +158,10 @@ class BubbleView: UIView {
         
         addSubview(messageText)
         messageText.snp.makeConstraints { (make) -> Void in
-            make.left.equalToSuperview().offset(12)
-            make.right.equalToSuperview().offset(12)
-            make.bottom.equalToSuperview().offset(18)
-            textTopConstraint = make.top.equalToSuperview().offset(12).constraint
+            make.left.equalToSuperview().inset(12)
+            make.right.equalToSuperview().inset(12)
+            make.bottom.equalToSuperview().inset(24)
+            textTopConstraint = make.top.equalToSuperview().inset(10).constraint
         }
         
         DispatchQueue.main.async { [weak self] in
@@ -177,7 +177,11 @@ class BubbleView: UIView {
                     ],
                     documentAttributes: nil
                 )
-                let fullRange = NSRange(location: 0, length: attributed?.length ?? 0)
+                attributed?.addAttribute(
+                    .font,
+                    value: UIFont.systemFont(ofSize: 14.0),
+                    range: NSRange(location: 0, length: attributed?.length ?? 0)
+                )
                 self.messageText.attributedText = attributed
                 self.messageText.sizeToFit()
             }
@@ -192,15 +196,17 @@ class BubbleView: UIView {
         
         addSubview(statusText)
         statusText.snp.makeConstraints { (make) -> Void in
-            make.left.greaterThanOrEqualToSuperview().offset(1)
+            make.left.greaterThanOrEqualToSuperview().inset(1)
             
             let rightOffset = statusImage == nil ? 12 : 32
-            make.right.equalToSuperview().offset(rightOffset)
+            make.right.equalToSuperview().inset(rightOffset)
             
-            make.bottom.equalToSuperview().offset(6)
+            make.bottom.equalToSuperview().inset(6)
         }
  
         statusText.text = statusSubtitle
+        statusText.font = .systemFont(ofSize: 12)
+        statusText.textColor = .secondaryLabel
         statusText.sizeToFit()
         
         // MARK: - setup status icon

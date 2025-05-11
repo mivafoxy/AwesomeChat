@@ -77,3 +77,12 @@ public struct ChatBubbleLeft: View {
         )
     }
 }
+
+#Preview {
+    ChatBubbleLeft(
+        title: "Title",
+        userName: "UserName",
+        message: .init(text: "sdfsdfsfsdffdsfdffsdfsfddfsfs", statusSubtitle: "21:00"), avatar: nil,
+        cornerRadiusSet: .init(allRadius: 6)
+    )
+}

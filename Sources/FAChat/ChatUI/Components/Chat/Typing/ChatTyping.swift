@@ -30,10 +30,10 @@ public struct ChatTyping: View {
         HStack(spacing: .zero) {
             Text("🧑🏻‍💻")
                 .font(.caption)
-                .foregroundStyle(.black)
+                .foregroundStyle(.secondary)
             Text(typoText)
                 .font(.caption)
-                .foregroundStyle(.black)
+                .foregroundStyle(.secondary)
             animatedDots
         }
     }
@@ -112,4 +112,8 @@ public struct ChatTyping: View {
         
         return (scale, opacity)
     }
+}
+
+#Preview {
+    ChatTyping(typoText: "Печатает")
 }

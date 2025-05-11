@@ -38,3 +38,9 @@ public struct ChatBubbleRight: View {
         }
     }
 }
+
+#Preview {
+    ChatBubbleRight(
+        message: .init(text: "Hello", statusSubtitle: "21:00"),
+        cornerRadiusSet: .init(allRadius: 6))
+}

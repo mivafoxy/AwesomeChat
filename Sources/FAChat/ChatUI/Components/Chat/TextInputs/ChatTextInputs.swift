@@ -72,7 +72,7 @@ public struct ChatTextInputs: View {
                 if text.isEmpty {
                     Text(placeholder)
                         .font(.callout)
-                        .foregroundStyle(.black)
+                        .foregroundStyle(.secondary)
                         .padding(.leading, 10.0)
                 }
             }
@@ -82,7 +82,7 @@ public struct ChatTextInputs: View {
     private var sendMessage: some View {
         Circle()
             .overlay(
-                Image(systemName: "arrow.up.message")
+                Image(systemName: "arrow.up").foregroundStyle(.background)
             )
             .foregroundStyle(.link)
             .frame(width: 24.0, height: 24.0)
@@ -91,4 +91,10 @@ public struct ChatTextInputs: View {
                 onSendTap?()
             }
     }
+}
+
+
+#Preview {
+    @Previewable @State var text = ""
+    ChatTextInputs(text: $text, placeholder: "Введите сообщение", onSendTap: nil)
 }

@@ -54,3 +54,13 @@ public struct ChatQuote: View {
             )
     }
 }
+
+#Preview {
+    ChatQuote(
+        title: "Оператор",
+        content: "Жили были не тужили",
+        image: Image(systemName: "xbox.logo"),
+        fileImage: Image(systemName: "arrow.down.document"),
+        onCloseTap: nil
+    )
+}

@@ -15,7 +15,7 @@ public struct Loader: View {
         Circle()
             .trim(from: 0.5, to: 1)
             .stroke(
-                Color(.magenta),
+                Color(.blue),
                 style: StrokeStyle(lineWidth: 4, lineCap: .round)
             )
             .frame(width: 28, height: 28)
@@ -32,9 +32,13 @@ public struct Loader: View {
             .background {
                 Circle()
                     .stroke(
-                        Color(.systemGray),
+                        Color(.systemGray4),
                         style: StrokeStyle(lineWidth: 4, lineCap: .round)
                     )
             }
     }
+}
+
+#Preview {
+    Loader()
 }

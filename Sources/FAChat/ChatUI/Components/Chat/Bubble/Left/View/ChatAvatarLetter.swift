@@ -17,11 +17,15 @@ struct ChatAvatarLetter: View {
                 width: 20.0,
                 height: 20.0
             )
-            .foregroundStyle(.cyan)
+            .foregroundStyle(.blue)
             .overlay {
                 Text(userName.prefix(1))
                     .font(.subheadline)
-                    .foregroundStyle(.link)
+                    .foregroundStyle(.background)
             }
     }
+}
+
+#Preview {
+    ChatAvatarLetter(userName: "Lol")
 }

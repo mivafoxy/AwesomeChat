@@ -24,3 +24,7 @@ public struct ChatDate: View {
         }
     }
 }
+
+#Preview {
+    ChatDate(text: "21 июня")
+}

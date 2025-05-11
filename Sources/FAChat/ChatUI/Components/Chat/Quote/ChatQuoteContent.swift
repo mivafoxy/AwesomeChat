@@ -70,3 +70,12 @@ struct ChatQuoteContent: View {
         }
     }
 }
+
+#Preview {
+    ChatQuoteContent(
+        image: Image(systemName: "xbox.logo"),
+        fileImage: Image(systemName: "arrow.down.document"),
+        title: "Оператор",
+        content: "Кек"
+    )
+}

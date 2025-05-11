@@ -30,11 +30,11 @@ struct IndicatorEmptyState: View {
             Spacer()
             Button(action: buttonAction, label: {
                 RoundedRectangle(cornerRadius: 12.0)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(.orange)
                     .overlay {
                         Text(buttonText)
                             .font(.body)
-                            .foregroundStyle(.primary)
+                            .foregroundStyle(.black)
                     }
             })
                 .frame(height: 52.0, alignment: .center)
@@ -43,4 +43,8 @@ struct IndicatorEmptyState: View {
                 .padding(.bottom, 24.0)
         }
     }
+}
+
+#Preview {
+    IndicatorEmptyState(title: "Извините, что то пошло не так", buttonText: "Попробовать снова", buttonAction: { })
 }

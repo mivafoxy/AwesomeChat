@@ -19,11 +19,7 @@ public struct ChatButtonTooltipBanner: View {
     public var body: some View {
         HStack(spacing: .zero) {
             ForEach(1..<(maxRatingCount + 1)) { i in
-                Image(
-                    uiImage: i <= filledStars ?
-                    Image(systemName: "star").getUIImage(newSize: CGSize(width: 40, height: 40)) :
-                    Image(systemName: "star.fill").getUIImage(newSize: CGSize(width: 40, height: 40))
-                )
+                Image(systemName: i <= filledStars ? "star.fill" : "star")
                     .resizable()
                     .scaledToFit()
                     .foregroundStyle(.orange)
@@ -34,4 +30,9 @@ public struct ChatButtonTooltipBanner: View {
             }
         }
     }
+}
+
+#Preview {
+    @Previewable @State var filledStars = 0
+    ChatButtonTooltipBanner(filledStars: $filledStars)
 }

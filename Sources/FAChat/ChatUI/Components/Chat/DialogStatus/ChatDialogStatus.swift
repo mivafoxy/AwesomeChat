@@ -21,9 +21,13 @@ public struct ChatDialogStatus: View {
                 .font(.caption)
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-                .foregroundStyle(.cyan)
+                .foregroundStyle(.secondary)
                 .padding(.horizontal, 48.0)
                 .padding(.vertical, 12.0)
         }
     }
+}
+
+#Preview {
+    ChatDialogStatus(text: "Оператор подключился к диалогу")
 }
