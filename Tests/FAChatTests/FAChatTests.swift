@@ -1,11 +1,11 @@
 import XCTest
-@testable import FAChat
+@testable import MyChat
 
-final class FAChatTests: XCTestCase {
+final class MyChatTests: XCTestCase {
     func testExample() throws {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(FAChat().text, "Hello, World!")
+        XCTAssertEqual(MyChat().text, "Hello, World!")
     }
 }

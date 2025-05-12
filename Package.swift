@@ -4,20 +4,20 @@
 import PackageDescription
 
 let package = Package(
-    name: "FAChat",
+    name: "MyChat",
     defaultLocalization: "ru",
     platforms: [.iOS(.v17)],
     products: [
         .library(
-            name: "FAChat",
-            targets: ["FAChat"]),
+            name: "MyChat",
+            targets: ["MyChat"]),
     ],
     dependencies: [
         .package(url: "https://github.com/SnapKit/SnapKit.git", .upToNextMajor(from: "5.0.1"))
     ],
     targets: [
         .target(
-            name: "FAChat",
+            name: "MyChat",
             dependencies: [
                 .byName(name: "SnapKit")
             ]),
