@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		D081FF452DD3C77300BA2063 /* MyChat in Frameworks */ = {isa = PBXBuildFile; productRef = D081FF442DD3C77300BA2063 /* MyChat */; };
+		D0B6CBA52DD3C9280025A971 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0B6CBA42DD3C9280025A971 /* GoogleService-Info.plist */; };
+		D0B6CBA62DD3C9280025A971 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0B6CBA42DD3C9280025A971 /* GoogleService-Info.plist */; };
+		D0B6CBA72DD3C9280025A971 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0B6CBA42DD3C9280025A971 /* GoogleService-Info.plist */; };
+		D0B6CBAA2DD3CA0C0025A971 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D0B6CBA92DD3CA0C0025A971 /* FirebaseAuth */; };
+		D0B6CBAC2DD3CA0C0025A971 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D0B6CBAB2DD3CA0C0025A971 /* FirebaseFirestore */; };
+		D0B6CBAE2DD3CA0C0025A971 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D0B6CBAD2DD3CA0C0025A971 /* FirebaseStorage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +37,7 @@
 		D081FF162DD3C74D00BA2063 /* AwesomeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwesomeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D081FF262DD3C74E00BA2063 /* AwesomeChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AwesomeChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D081FF302DD3C74E00BA2063 /* AwesomeChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AwesomeChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0B6CBA42DD3C9280025A971 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -75,6 +82,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				D081FF452DD3C77300BA2063 /* MyChat in Frameworks */,
+				D0B6CBAE2DD3CA0C0025A971 /* FirebaseStorage in Frameworks */,
+				D0B6CBAA2DD3CA0C0025A971 /* FirebaseAuth in Frameworks */,
+				D0B6CBAC2DD3CA0C0025A971 /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +108,7 @@
 		D081FF0D2DD3C74D00BA2063 = {
 			isa = PBXGroup;
 			children = (
+				D0B6CBA42DD3C9280025A971 /* GoogleService-Info.plist */,
 				D081FF462DD3C77F00BA2063 /* Packages */,
 				D081FF182DD3C74D00BA2063 /* AwesomeChat */,
 				D081FF292DD3C74E00BA2063 /* AwesomeChatTests */,
@@ -138,6 +149,9 @@
 			name = AwesomeChat;
 			packageProductDependencies = (
 				D081FF442DD3C77300BA2063 /* MyChat */,
+				D0B6CBA92DD3CA0C0025A971 /* FirebaseAuth */,
+				D0B6CBAB2DD3CA0C0025A971 /* FirebaseFirestore */,
+				D0B6CBAD2DD3CA0C0025A971 /* FirebaseStorage */,
 			);
 			productName = AwesomeChat;
 			productReference = D081FF162DD3C74D00BA2063 /* AwesomeChat.app */;
@@ -223,6 +237,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				D081FF432DD3C77300BA2063 /* XCLocalSwiftPackageReference "../../MyAwesomeChat" */,
+				D0B6CBA82DD3CA0C0025A971 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D081FF172DD3C74D00BA2063 /* Products */;
@@ -241,6 +256,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B6CBA72DD3C9280025A971 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,6 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B6CBA62DD3C9280025A971 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +272,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B6CBA52DD3C9280025A971 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,10 +613,36 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		D0B6CBA82DD3CA0C0025A971 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.12.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		D081FF442DD3C77300BA2063 /* MyChat */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = MyChat;
+		};
+		D0B6CBA92DD3CA0C0025A971 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0B6CBA82DD3CA0C0025A971 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D0B6CBAB2DD3CA0C0025A971 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0B6CBA82DD3CA0C0025A971 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		D0B6CBAD2DD3CA0C0025A971 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D0B6CBA82DD3CA0C0025A971 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
