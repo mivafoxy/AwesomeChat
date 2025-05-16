@@ -44,6 +44,7 @@
 		D0B6CBA32DD3C7DA0025A971 /* Exceptions for "Packages" folder in "AwesomeChat" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				AwesomeChatWebApi,
 				MyAwesomeChat,
 			);
 			target = D081FF152DD3C74D00BA2063 /* AwesomeChat */;
@@ -459,7 +460,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mivafox.AwesomeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -488,7 +489,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mivafox.AwesomeChat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
