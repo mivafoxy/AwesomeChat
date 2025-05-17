@@ -40,17 +40,6 @@
 		D0B6CBA42DD3C9280025A971 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		D0B6CBA32DD3C7DA0025A971 /* Exceptions for "Packages" folder in "AwesomeChat" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				AwesomeChatWebApi,
-				MyAwesomeChat,
-			);
-			target = D081FF152DD3C74D00BA2063 /* AwesomeChat */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D081FF182DD3C74D00BA2063 /* AwesomeChat */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
@@ -69,9 +58,6 @@
 		};
 		D081FF462DD3C77F00BA2063 /* Packages */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				D0B6CBA32DD3C7DA0025A971 /* Exceptions for "Packages" folder in "AwesomeChat" target */,
-			);
 			path = Packages;
 			sourceTree = "<group>";
 		};
