@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D081FF452DD3C77300BA2063 /* MyChat in Frameworks */ = {isa = PBXBuildFile; productRef = D081FF442DD3C77300BA2063 /* MyChat */; };
+		D08958A02DD8909C008D89E9 /* MyAwesomeChat in Frameworks */ = {isa = PBXBuildFile; productRef = D089589F2DD8909C008D89E9 /* MyAwesomeChat */; };
 		D0B6CBA52DD3C9280025A971 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0B6CBA42DD3C9280025A971 /* GoogleService-Info.plist */; };
 		D0B6CBA62DD3C9280025A971 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0B6CBA42DD3C9280025A971 /* GoogleService-Info.plist */; };
 		D0B6CBA72DD3C9280025A971 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D0B6CBA42DD3C9280025A971 /* GoogleService-Info.plist */; };
@@ -37,6 +37,8 @@
 		D081FF162DD3C74D00BA2063 /* AwesomeChat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwesomeChat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D081FF262DD3C74E00BA2063 /* AwesomeChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AwesomeChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D081FF302DD3C74E00BA2063 /* AwesomeChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AwesomeChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D089589A2DD89001008D89E9 /* AwesomeChatWebApi */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = AwesomeChatWebApi; sourceTree = "<group>"; };
+		D089589B2DD89001008D89E9 /* MyAwesomeChat */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = MyAwesomeChat; sourceTree = "<group>"; };
 		D0B6CBA42DD3C9280025A971 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -56,11 +58,6 @@
 			path = AwesomeChatUITests;
 			sourceTree = "<group>";
 		};
-		D081FF462DD3C77F00BA2063 /* Packages */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Packages;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D081FF452DD3C77300BA2063 /* MyChat in Frameworks */,
+				D08958A02DD8909C008D89E9 /* MyAwesomeChat in Frameworks */,
 				D0B6CBAE2DD3CA0C0025A971 /* FirebaseStorage in Frameworks */,
 				D0B6CBAA2DD3CA0C0025A971 /* FirebaseAuth in Frameworks */,
 				D0B6CBAC2DD3CA0C0025A971 /* FirebaseFirestore in Frameworks */,
@@ -95,11 +92,12 @@
 		D081FF0D2DD3C74D00BA2063 = {
 			isa = PBXGroup;
 			children = (
+				D089589C2DD89001008D89E9 /* LocalPackages */,
 				D0B6CBA42DD3C9280025A971 /* GoogleService-Info.plist */,
-				D081FF462DD3C77F00BA2063 /* Packages */,
 				D081FF182DD3C74D00BA2063 /* AwesomeChat */,
 				D081FF292DD3C74E00BA2063 /* AwesomeChatTests */,
 				D081FF332DD3C74E00BA2063 /* AwesomeChatUITests */,
+				D089589E2DD8909C008D89E9 /* Frameworks */,
 				D081FF172DD3C74D00BA2063 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +110,22 @@
 				D081FF302DD3C74E00BA2063 /* AwesomeChatUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D089589C2DD89001008D89E9 /* LocalPackages */ = {
+			isa = PBXGroup;
+			children = (
+				D089589A2DD89001008D89E9 /* AwesomeChatWebApi */,
+				D089589B2DD89001008D89E9 /* MyAwesomeChat */,
+			);
+			path = LocalPackages;
+			sourceTree = "<group>";
+		};
+		D089589E2DD8909C008D89E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,14 +145,13 @@
 			);
 			fileSystemSynchronizedGroups = (
 				D081FF182DD3C74D00BA2063 /* AwesomeChat */,
-				D081FF462DD3C77F00BA2063 /* Packages */,
 			);
 			name = AwesomeChat;
 			packageProductDependencies = (
-				D081FF442DD3C77300BA2063 /* MyChat */,
 				D0B6CBA92DD3CA0C0025A971 /* FirebaseAuth */,
 				D0B6CBAB2DD3CA0C0025A971 /* FirebaseFirestore */,
 				D0B6CBAD2DD3CA0C0025A971 /* FirebaseStorage */,
+				D089589F2DD8909C008D89E9 /* MyAwesomeChat */,
 			);
 			productName = AwesomeChat;
 			productReference = D081FF162DD3C74D00BA2063 /* AwesomeChat.app */;
@@ -223,8 +236,8 @@
 			mainGroup = D081FF0D2DD3C74D00BA2063;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				D081FF432DD3C77300BA2063 /* XCLocalSwiftPackageReference "../../MyAwesomeChat" */,
 				D0B6CBA82DD3CA0C0025A971 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D089589D2DD8904C008D89E9 /* XCLocalSwiftPackageReference "LocalPackages/MyAwesomeChat" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D081FF172DD3C74D00BA2063 /* Products */;
@@ -594,9 +607,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		D081FF432DD3C77300BA2063 /* XCLocalSwiftPackageReference "../../MyAwesomeChat" */ = {
+		D089589D2DD8904C008D89E9 /* XCLocalSwiftPackageReference "LocalPackages/MyAwesomeChat" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ../../MyAwesomeChat;
+			relativePath = LocalPackages/MyAwesomeChat;
 		};
 /* End XCLocalSwiftPackageReference section */
 
@@ -612,9 +625,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D081FF442DD3C77300BA2063 /* MyChat */ = {
+		D089589F2DD8909C008D89E9 /* MyAwesomeChat */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = MyChat;
+			productName = MyAwesomeChat;
 		};
 		D0B6CBA92DD3CA0C0025A971 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
