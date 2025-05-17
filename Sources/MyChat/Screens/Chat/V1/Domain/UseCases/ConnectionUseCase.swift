@@ -5,8 +5,8 @@
 //  Created by Илья Малахов on 08.05.2025.
 //
 
-protocol ConnectionUseCaseProtocol {
-    func connect() throws
+protocol ConnectionUseCaseProtocol: Sendable {
+    func connect() async throws
     func disconnect()
     func observeConnection() -> AsyncStream<ConnectionState>
     func observeAuthorization() -> AsyncStream<AuthorizationState>
@@ -15,23 +15,23 @@ protocol ConnectionUseCaseProtocol {
 final class ConnectionUseCase: ConnectionUseCaseProtocol {
     
     private let chatRepository: ChatRepositoryProtocol
-    private var connectionTask: Task<Void, Error>?
+    private let connectionTask: TaskHolder<Void, Error>
     
     init(chatRepository: ChatRepositoryProtocol) {
         self.chatRepository = chatRepository
+        self.connectionTask = TaskHolder()
     }
     
-    func connect() throws {
-        connectionTask?.cancel()
-        connectionTask = Task.detached { [weak self] in
-            try await self?.chatRepository.connect()
+    func connect() async throws {
+        await connectionTask.cancelTask()
+        let task = Task.detached { [chatRepository = self.chatRepository] in
+            try await chatRepository.connect()
         }
+        await connectionTask.set(task: task)
     }
     
     func disconnect() {
-        Task.detached { [weak self] in
-            self?.chatRepository.disconnect()
-        }
+        chatRepository.disconnect()
     }
     
     func observeConnection() -> AsyncStream<ConnectionState> {

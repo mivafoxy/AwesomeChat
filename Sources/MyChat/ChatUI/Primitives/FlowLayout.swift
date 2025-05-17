@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FlowLayout<RefreshBinding, Data: Collection, ItemView: View>: View {
+@MainActor struct FlowLayout<RefreshBinding, Data: Collection, ItemView: View>: View {
     let mode: Mode
     let rotated: Bool
     @Binding var binding: RefreshBinding
@@ -50,17 +50,20 @@ struct FlowLayout<RefreshBinding, Data: Collection, ItemView: View>: View {
         }
     }
     
-    private func content(in g: GeometryProxy) -> some View {
+    @MainActor private func content(in g: GeometryProxy) -> some View {
+        let availableWidth = g.size.width
+
         var width = CGFloat.zero
         var height = CGFloat.zero
         var lastHeight = CGFloat.zero
         let itemCount = items.count
+
         return ZStack(alignment: .topLeading) {
             ForEach(Array(items.enumerated()), id: \.offset) { index, item in
                 viewMapping(item)
                     .padding([.horizontal, .vertical], itemSpacing)
                     .alignmentGuide(.leading, computeValue: { d in
-                        if (abs(width - d.width) > g.size.width) {
+                        if (abs(width - d.width) > availableWidth) {
                             width = 0
                             height -= lastHeight
                         }
@@ -85,6 +88,7 @@ struct FlowLayout<RefreshBinding, Data: Collection, ItemView: View>: View {
         }
         .background(HeightReaderView(binding: $totalHeight))
     }
+
     
     public enum Mode {
         case scrollable, vstack
@@ -93,7 +97,7 @@ struct FlowLayout<RefreshBinding, Data: Collection, ItemView: View>: View {
 
 private struct HeightPreferenceKey: PreferenceKey {
     static func reduce(value _: inout CGFloat, nextValue _: () -> CGFloat) {}
-    static var defaultValue: CGFloat = 0
+    static let defaultValue: CGFloat = 0
 }
 
 private struct HeightReaderView: View {
@@ -104,7 +108,9 @@ private struct HeightReaderView: View {
                 .preference(key: HeightPreferenceKey.self, value: geo.frame(in: .local).size.height)
         }
         .onPreferenceChange(HeightPreferenceKey.self) { h in
-            binding = h
+            Task.detached { @MainActor in
+                binding = h
+            }
         }
     }
 }

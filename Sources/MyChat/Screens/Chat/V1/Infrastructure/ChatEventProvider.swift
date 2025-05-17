@@ -5,7 +5,7 @@
 //  Created by Илья Малахов on 05.05.2025.
 //
 
-class ChatEventProvider {
+class ChatEventProvider: @unchecked Sendable {
     
     // MARK: - Privates
     

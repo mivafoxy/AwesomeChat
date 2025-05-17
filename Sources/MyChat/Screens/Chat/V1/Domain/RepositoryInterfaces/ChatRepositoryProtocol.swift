@@ -7,7 +7,7 @@
 
 // MARK: - ConnectionState
 
-enum ConnectionState {
+enum ConnectionState: @unchecked Sendable {
     case connected
     case disconnected(error: Error? = nil)
     case reconnect
@@ -15,21 +15,21 @@ enum ConnectionState {
 
 // MARK: - AuthorizationState
 
-enum AuthorizationState {
+enum AuthorizationState: @unchecked Sendable {
     case unauthorized
     case authorized
 }
 
 // MARK: - ErrorState
 
-struct ErrorState {
+struct ErrorState: @unchecked Sendable {
     let error: Error?
     let data: Any?
 }
 
 // MARK: - ChatRepositoryProtocol
 
-protocol ChatRepositoryProtocol {
+protocol ChatRepositoryProtocol: Sendable {
     func connect() async throws
     func observeConnection() -> AsyncStream<ConnectionState>
     

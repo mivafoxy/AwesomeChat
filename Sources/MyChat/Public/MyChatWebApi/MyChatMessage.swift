@@ -1,4 +1,4 @@
-public protocol MyChatMessage {
+public protocol MyChatMessage: Sendable {
     var id: String { get }
     var messageType: MyChatMessageType { get }
     var isReplied: Bool { get }

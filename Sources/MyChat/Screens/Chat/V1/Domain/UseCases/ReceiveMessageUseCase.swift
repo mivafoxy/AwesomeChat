@@ -5,7 +5,7 @@
 //  Created by Илья Малахов on 08.05.2025.
 //
 
-protocol ReceiveMessageUseCaseProtocol {
+protocol ReceiveMessageUseCaseProtocol: Sendable {
     func execute() -> AsyncStream<MyChatMessage>
 }
 

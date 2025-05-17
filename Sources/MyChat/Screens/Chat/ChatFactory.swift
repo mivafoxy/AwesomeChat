@@ -8,15 +8,15 @@ import UIKit
 import SwiftUI
 
 protocol ChatFactory {
-    static func makeChat(input: MyChatInput) -> UIViewController
+    @MainActor static func makeChat(input: MyChatInput) -> UIViewController
 }
 
 extension ChatFactory {
-    static func makeChat(input: MyChatInput) -> UIViewController {
+    @MainActor static func makeChat(input: MyChatInput) -> UIViewController {
         makeChatV1(input)
     }
     
-    private static func makeChatV1(_ input: MyChatInput) -> UIViewController {
+    @MainActor private static func makeChatV1(_ input: MyChatInput) -> UIViewController {
                 
         let badgeUseCase = BadgeUseCase(notificationService: input.notificationService)
         

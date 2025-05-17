@@ -5,7 +5,7 @@
 //  Created by Илья Малахов on 09.05.2025.
 //
 
-protocol AuthorizationUseCaseProtocol {
+protocol AuthorizationUseCaseProtocol: Sendable {
     func observeAuthorization() -> AsyncStream<AuthorizationState>
 }
 

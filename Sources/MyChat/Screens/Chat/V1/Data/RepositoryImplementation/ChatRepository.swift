@@ -5,7 +5,7 @@
 //  Created by Илья Малахов on 05.05.2025.
 //
 
-class ChatRepository: ChatRepositoryProtocol {
+final class ChatRepository: ChatRepositoryProtocol {
     
     // MARK: - Privates
     

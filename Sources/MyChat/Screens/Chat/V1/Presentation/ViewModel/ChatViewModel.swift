@@ -31,6 +31,7 @@ enum ChatState {
     case error
 }
 
+@MainActor
 final class ChatViewModel: ObservableObject {
     
     // MARK: - Message Publishers
@@ -67,7 +68,7 @@ final class ChatViewModel: ObservableObject {
     private var connectionStateTask: Task<Void, Never>?
     
     private let authorizationUseCase: AuthorizationUseCaseProtocol
-    private var authorizationObserverTast: Task<Void, Never>?
+    private var authorizationObserverTask: Task<Void, Never>?
     
     private let loadHistoryUseCase: LoadHistoryUseCaseProtocol
     private var receiveHistoryMessagesTask: Task<Void, Never>?
@@ -135,55 +136,57 @@ final class ChatViewModel: ObservableObject {
     // MARK: - Events
     
     func send(_ event: ChatAction) {
-        switch event {
-        case .onAppear:
-            onAppear()
-        case .onDisappear:
-            onDisappear()
-        case .onScrolling:
-            onScrolling()
-        case .onMessageSend:
-            onMessageSend()
-        case let .onQuote(id):
-            onQuote(id)
-        case let .onBotAction(action):
-            onChatBotAction(action: action)
-        case .onRefresh:
-            onRefresh()
-        case .onQuoteCloseTap:
-            quoted = nil
-        case .onRetry:
-            onRetry()
-        case .onDownButtonTap:
-            onDownButtonTap()
-        case let .onAnchorChange(offset):
-            onAnchorChange(offset)
-        case let .onMessageAppear(message):
-            onMessageAppear(message)
-        case let .onSendOperatorScore(score):
-            onSendOperatorScore(score)
-        case .onCloseTap:
-            onCloseTap()
+        Task {
+            switch event {
+            case .onAppear:
+                await self.onAppear()
+            case .onDisappear:
+                self.onDisappear()
+            case .onScrolling:
+                self.onScrolling()
+            case .onMessageSend:
+                await self.onMessageSend()
+            case let .onQuote(id):
+                self.onQuote(id)
+            case let .onBotAction(action):
+                self.onChatBotAction(action: action)
+            case .onRefresh:
+                await self.onRefresh()
+            case .onQuoteCloseTap:
+                self.quoted = nil
+            case .onRetry:
+                await self.onRetry()
+            case .onDownButtonTap:
+                await self.onDownButtonTap()
+            case let .onAnchorChange(offset):
+                self.onAnchorChange(offset)
+            case let .onMessageAppear(message):
+                self.onMessageAppear(message)
+            case let .onSendOperatorScore(score):
+                self.onSendOperatorScore(score)
+            case .onCloseTap:
+                self.onCloseTap()
+            }
         }
     }
     
     // MARK: - Action event handling
     
-    private func onAppear() {
+    private func onAppear() async {
         isChatTabBadgeHidden = true
         listen()
-        connect()
-        tryToLoadAbsentMessages()
+        await connect()
+        await tryToLoadAbsentMessages()
     }
     
-    private func tryToLoadAbsentMessages() {
-        loadHistoryUseCase.loadHistoryAfterReconnect()
+    private func tryToLoadAbsentMessages() async {
+        await loadHistoryUseCase.loadHistoryAfterReconnect()
     }
     
-    private func connect() {
+    private func connect() async {
         if !isConnected {
             do {
-                try connectUseCase.connect()
+                try await connectUseCase.connect()
             } catch {
                 update(state: .error)
             }
@@ -198,31 +201,31 @@ final class ChatViewModel: ObservableObject {
         isNeedScroll = false
     }
     
-    private func onMessageSend() {
+    private func onMessageSend() async {
         if !isConnected {
             pendingMessages.append(currentUserText)
         } else {
-            sendMessage(currentUserText)
+            await sendMessage(currentUserText)
         }
         currentUserText = ""
     }
     
-    private func sendMessage(_ content: String) {
+    private func sendMessage(_ content: String) async {
         isNeedScroll = true
-        sendReadingConfirmation()
+        await sendReadingConfirmation()
         sendMessageUseCase.sendMessage(messageContent: currentUserText, repliedMessage: quoted?.message)
         currentUserText = ""
         quoted = nil
     }
     
-    private func loadHistory() {
+    private func loadHistory() async  {
         let timestamp = listManager.getEarliestTimestamp(from: dateMessageGroups)
-        loadHistoryUseCase.loadHistory(timespan: timestamp)
+        await loadHistoryUseCase.loadHistory(timespan: timestamp)
     }
     
-    private func sendReadingConfirmation() {
+    private func sendReadingConfirmation() async {
         let operatorMessageIds = listManager.getOperatorMessages(from: dateMessageGroups).map { $0.id }
-        sendConfirmationUseCase.sendConfirmation(for: operatorMessageIds)
+        await sendConfirmationUseCase.sendConfirmation(for: operatorMessageIds)
     }
     
     private func onQuote(_ messageId: String) {
@@ -242,23 +245,23 @@ final class ChatViewModel: ObservableObject {
         sendMessageUseCase.sendMessage(messageContent: action.content, repliedMessage: nil)
     }
     
-    private func onRefresh() {
+    private func onRefresh() async {
         if isConnected {
             guard !isRefreshing else { return }
-            loadHistory()
+            await loadHistory()
         } else {
-            connect()
+            await connect()
         }
     }
     
-    private func onRetry() {
+    private func onRetry() async {
         update(state: .loading)
-        connect()
+        await connect()
     }
     
-    private func onDownButtonTap() {
+    private func onDownButtonTap() async {
         isNeedScroll.toggle()
-        setReadStatusForUnreadMessages()
+        await setReadStatusForUnreadMessages()
     }
     
     private func onAnchorChange(_ offset: Double) {
@@ -307,24 +310,19 @@ final class ChatViewModel: ObservableObject {
             .messages[indices.message] = newMessage
     }
     
-    private func setReadStatusForUnreadMessages() {
+    private func setReadStatusForUnreadMessages() async {
         let unread = listManager.getOperatorMessages(from: dateMessageGroups)
             .filter { message in message.readStatus == .unread }
             .compactMap { $0.id }
-        Task.detached(priority: .background) { [weak self] in
-            unread.forEach { self?.sendReadConfirmation(for: $0) }
+        await unread.forEachAsync { @Sendable [weak self] in
+            await self?.sendReadConfirmation(for: $0)
         }
     }
     
     private func updateUnreadCounter() {
-        Task.detached { @MainActor [weak self] in
-            guard let self = self else { return }
-            self.unreadCount = self
-                .listManager
-                .getOperatorMessages(from: self.dateMessageGroups)
-                .filter { $0.readStatus == .unread }
-                .count
-        }
+        unreadCount = listManager.getOperatorMessages(from: dateMessageGroups)
+            .filter { $0.readStatus == .unread }
+            .count
     }
     
     private func sendOperatorScore(_ operatorScore: Int) {
@@ -337,9 +335,7 @@ final class ChatViewModel: ObservableObject {
     
     fileprivate func update(state: ChatState) {
         guard self.state != state else { return }
-        Task { @MainActor [weak self] in
-            self?.state = state
-        }
+        self.state = state
     }
     
     // MARK: - OBserve events from lib
@@ -356,20 +352,19 @@ final class ChatViewModel: ObservableObject {
     
     private func receiveConnectionState() {
         connectionStateTask?.cancel()
-        connectionStateTask = Task.detached { [weak self] in
+        connectionStateTask = Task { [weak self] in
             guard let self else { return }
-            print(#function)
-            for await state in connectUseCase.observeConnection() {
+            for await state in self.connectUseCase.observeConnection() {
                 switch state {
                 case .connected:
-                    isConnected = true
+                    self.isConnected = true
                 case let .disconnected(error):
                     if error != nil {
                         self.state = .error
                     }
-                    isConnected = false
+                    self.isConnected = false
                 case .reconnect:
-                    isConnected = false
+                    self.isConnected = false
                 }
             }
         }
@@ -378,8 +373,8 @@ final class ChatViewModel: ObservableObject {
     // MARK: - Observing authorization state
     
     private func receiveAuthorizationState() {
-        authorizationObserverTast?.cancel()
-        authorizationObserverTast = Task.detached { [weak self] in
+        authorizationObserverTask?.cancel()
+        authorizationObserverTask = Task { [weak self] in
             guard let self else { return }
             for await state in authorizationUseCase.observeAuthorization() {
                 switch state {
@@ -387,17 +382,21 @@ final class ChatViewModel: ObservableObject {
                     connectUseCase.disconnect()
                 case .authorized:
                     startDialogUseCase.execute()
-                    if !pendingMessages.isEmpty {
-                        pendingMessages.forEach { self.sendMessage($0) }
-                        pendingMessages.removeAll()
-                    }
+                    await sendPendingMessages()
                     let zeroPoint = 0
-                    loadHistoryUseCase.loadHistory(timespan: zeroPoint)
-                    await MainActor.run { [weak self] in
-                        self?.state = .content
-                    }
+                    await loadHistoryUseCase.loadHistory(timespan: zeroPoint)
+                    self.state = .content
                 }
             }
+        }
+    }
+    
+    private func sendPendingMessages() async {
+        if !pendingMessages.isEmpty {
+            await pendingMessages.forEachAsync { @Sendable [weak self] in
+                await self?.sendMessage($0)
+            }
+            pendingMessages.removeAll()
         }
     }
     
@@ -405,7 +404,7 @@ final class ChatViewModel: ObservableObject {
     
     private func receiveMessages() {
         receiveMessageTask?.cancel()
-        receiveMessageTask = Task.detached { [weak self] in
+        receiveMessageTask = Task { [weak self] in
             guard let self else { return }
             for await message in receiveMessageUseCase.execute() {
                 await MainActor.run { [weak self] in
@@ -504,13 +503,10 @@ final class ChatViewModel: ObservableObject {
     
     private func receiveHistoryMessages() {
         receiveHistoryMessagesTask?.cancel()
-        receiveHistoryMessagesTask = Task.detached { [weak self] in
+        receiveHistoryMessagesTask = Task { [weak self] in
             guard let self else { return }
             for await messages in loadHistoryUseCase.observeHistoryMessages() {
-                await MainActor.run { [weak self] in
-                    self?.didReceiveHistoryMessages(messages)
-                }
-                
+                self.didReceiveHistoryMessages(messages)
             }
         }
     }
@@ -526,7 +522,7 @@ final class ChatViewModel: ObservableObject {
     
     private func receiveErrors() {
         receiveErrorTask?.cancel()
-        receiveErrorTask = Task.detached { [weak self] in
+        receiveErrorTask = Task { [weak self] in
             guard let self else { return }
             for await error in receiveErrorUseCase.observeErrors() {
                 if error.error != nil {
