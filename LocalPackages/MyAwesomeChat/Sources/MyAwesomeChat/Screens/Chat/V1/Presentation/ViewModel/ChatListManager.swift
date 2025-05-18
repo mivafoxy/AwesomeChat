@@ -42,6 +42,7 @@ final class ChatListManager {
         dateMessageGroups: inout [DateMessageGroup],
         botActions: inout [ChatBotAction]
     ) {
+        guard isNewMessages(newMessages, dateMessageGroups) else { return }
         for message in newMessages {
             guard !hasMessage(message) else { continue }
             messageIds.insert(message.id)
@@ -279,5 +280,16 @@ final class ChatListManager {
     
     private func hasMessage(with id: String) -> Bool {
         messageIds.contains(id)
+    }
+    
+    private func isNewMessages(_ messages: [ChatMessage], _ dateMessageGroup: [DateMessageGroup]) -> Bool {
+        if let last = getAllMessages(from: dateMessageGroup).last {
+            for message in messages {
+                if message.timestamp < last.timestamp {
+                    return false
+                }
+            }
+        }
+        return true
     }
 }

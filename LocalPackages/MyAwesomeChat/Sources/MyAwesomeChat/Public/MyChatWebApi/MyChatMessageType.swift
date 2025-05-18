@@ -1,4 +1,4 @@
-public enum MyChatMessageType: Int {
+public enum MyChatMessageType: Int, Sendable {
     /// Сообщение клиента, бота или оператора
     case visitorMessage = 1
 
