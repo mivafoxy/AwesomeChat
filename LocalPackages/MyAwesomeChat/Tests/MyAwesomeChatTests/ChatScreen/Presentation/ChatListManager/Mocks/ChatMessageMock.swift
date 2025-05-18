@@ -5,7 +5,7 @@
 //  Created by Илья Малахов on 18.05.2025.
 //
 
-@testable import MyAwesomeChat
+import MyAwesomeChat
 
 struct ChatMessageMock: MyChatMessage {
     let id: String
